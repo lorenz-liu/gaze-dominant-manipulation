@@ -23,27 +23,29 @@ public class EyeTracker : MonoBehaviour
         EyeRightSqueeze
     }
     
-    private static Dictionary <XrEyeShapeHTC, EyeAction> _shapeMap;
+    private static readonly Dictionary <XrEyeShapeHTC, EyeAction> ShapeMap = new()
+    {
+        {XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_BLINK_HTC, EyeAction.EyeLeftBlink},
+        {XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_WIDE_HTC, EyeAction.EyeLeftWide},
+        {XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_BLINK_HTC, EyeAction.EyeRightBlink},
+        {XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_WIDE_HTC, EyeAction.EyeRightWide},
+        {XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_SQUEEZE_HTC, EyeAction.EyeLeftSqueeze},
+        {XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_SQUEEZE_HTC,EyeAction.EyeRightSqueeze},
+        {XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_DOWN_HTC, EyeAction.EyeLeftDown},
+        {XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_DOWN_HTC,EyeAction.EyeRightDown},
+        {XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_OUT_HTC,EyeAction.EyeLeftLeft},
+        {XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_IN_HTC,EyeAction.EyeRightLeft}, 
+        {XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_IN_HTC, EyeAction.EyeLeftRight},
+        {XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_OUT_HTC, EyeAction.EyeRightRight},
+        {XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_UP_HTC, EyeAction.EyeLeftUp},
+        {XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_UP_HTC ,EyeAction.EyeRightUp}
+    };
+    
     private FacialManager _facialManager;
     private Dictionary<XrEyeShapeHTC,float> _eyeWeightings = new();
 
     private void Start()
     {
-        _shapeMap.Add(XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_BLINK_HTC, EyeAction.EyeLeftBlink);
-        _shapeMap.Add(XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_WIDE_HTC, EyeAction.EyeLeftWide);
-        _shapeMap.Add(XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_BLINK_HTC, EyeAction.EyeRightBlink);
-        _shapeMap.Add(XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_WIDE_HTC, EyeAction.EyeRightWide );
-        _shapeMap.Add(XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_SQUEEZE_HTC, EyeAction.EyeLeftSqueeze );
-        _shapeMap.Add(XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_SQUEEZE_HTC,EyeAction.EyeRightSqueeze );
-        _shapeMap.Add(XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_DOWN_HTC, EyeAction.EyeLeftDown);
-        _shapeMap.Add(XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_DOWN_HTC,EyeAction.EyeRightDown);
-        _shapeMap.Add(XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_OUT_HTC,EyeAction.EyeLeftLeft );
-        _shapeMap.Add(XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_IN_HTC,EyeAction.EyeRightLeft ); 
-        _shapeMap.Add(XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_IN_HTC, EyeAction.EyeLeftRight );
-        _shapeMap.Add(XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_OUT_HTC, EyeAction.EyeRightRight );
-        _shapeMap.Add(XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_UP_HTC, EyeAction.EyeLeftUp );
-        _shapeMap.Add(XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_UP_HTC ,EyeAction.EyeRightUp );
-        
         _facialManager.StartFramework(XrFacialTrackingTypeHTC.XR_FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC);
     }
 
@@ -55,7 +57,7 @@ public class EyeTracker : MonoBehaviour
              i < XrEyeShapeHTC.XR_EYE_EXPRESSION_MAX_ENUM_HTC;
              ++i)
         {
-            Debug.Log("Eye Tracker Feedback: [" + _shapeMap[i] + "] " + _eyeWeightings[i]);
+            Debug.Log("Eye Tracker Feedback: [" + ShapeMap[i] + "] " + _eyeWeightings[i]);
         }
     }
 
