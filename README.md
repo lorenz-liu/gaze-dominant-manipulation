@@ -1,7 +1,8 @@
 # BUAA-Graduation-Project
 Design and Implementation of a Head-eye Collaborative Object Manipulation Method in Virtual Reality. 
 
-## Dev Env
+## Dev Env (By relying sequence order)
 
-Unity Editor: 2019.1.9f1
+* Unity Hub
+* [Unity Editor 2021.3.16f1](unityhub://2021.3.16f1)
 
