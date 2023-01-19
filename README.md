@@ -3,6 +3,8 @@ Design and Implementation of a Head-eye Collaborative Object Manipulation Method
 
 ## Prerequisites
 
+OS: Windows 10+
+
 Please install by order in case config chaos:
 
 * [INSTALL](https://unity.com/download) Unity Hub
