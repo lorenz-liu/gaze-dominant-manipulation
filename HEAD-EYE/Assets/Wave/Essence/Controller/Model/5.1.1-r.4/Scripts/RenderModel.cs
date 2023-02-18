@@ -22,21 +22,13 @@ namespace Wave.Essence.Controller.Model
 {
 	public class RenderModel : MonoBehaviour
 	{
-		private static string LOG_TAG = "RenderModel";
-		private void PrintDebugLog(string msg)
-		{
-			Log.d(LOG_TAG, "Hand: " + WhichHand + ", " + msg);
-		}
+		private static string LOG_TAG = "Wave.Essence.Controller.Model.RenderModel";
+		private void PrintDebugLog(string msg) { Log.d(LOG_TAG, "Hand: " + WhichHand + ", " + msg, true); }
+		bool printIntervalLog = false;
+		int logFrame = 0;
+		private void INTERVAL(string msg) { if (printIntervalLog) { PrintDebugLog(msg); } }
 
-		private void PrintInfoLog(string msg)
-		{
-			Log.i(LOG_TAG, "Hand: " + WhichHand + ", " + msg);
-		}
-
-		private void PrintWarningLog(string msg)
-		{
-			Log.w(LOG_TAG, "Hand: " + WhichHand + ", " + msg);
-		}
+		private void PrintInfoLog(string msg) { Log.i(LOG_TAG, "Hand: " + WhichHand + ", " + msg, true); }
 
 		public enum LoadingState
 		{
@@ -55,9 +47,8 @@ namespace Wave.Essence.Controller.Model
 		public static event RenderModelDelegate onRenderModelRemoved = null;
 
 		private GameObject controllerSpawned = null;
-		private XRNode node;
 
-		private bool connected = false;
+		private bool m_Connected = false, m_Tracked = false;
 		private string renderModelNamePath = "";
 		private string renderModelName = "";
 
@@ -81,8 +72,6 @@ namespace Wave.Essence.Controller.Model
 		private bool showModel = false;
 
 		private bool EnableDirectPreview = false;
-
-		private InputDevice inputDevice;
 
 		class Component
 		{
@@ -163,18 +152,9 @@ namespace Wave.Essence.Controller.Model
 				DestroyRenderModel("RenderModel doesn't expect model is in loading, delete all children");
 			}
 
-			if (WhichHand == XR_Hand.Dominant)
-			{
-				node = XRNode.RightHand;
-			}
-			else
-			{
-				node = XRNode.LeftHand;
-			}
+			m_Connected = WXRDevice.IsConnected((XR_Device)WhichHand);
 
-			connected = CheckConnection();
-
-			if (connected)
+			if (m_Connected)
 			{
 				WVR_DeviceType type = CheckDeviceType();
 
@@ -253,11 +233,8 @@ namespace Wave.Essence.Controller.Model
 
 		private bool isRenderModelNameSameAsPrevious()
 		{
-			bool _connected = CheckConnection();
 			bool _same = false;
-
-			if (!_connected)
-				return _same;
+			if (!m_Connected) { return _same; }
 
 			WVR_DeviceType type = CheckDeviceType();
 
@@ -291,7 +268,7 @@ namespace Wave.Essence.Controller.Model
 		// Use this for initialization
 		void Start()
 		{
-			PrintDebugLog("start() connect: " + connected + " Which hand: " + WhichHand);
+			PrintDebugLog("start() connect: " + m_Connected + " Which hand: " + WhichHand);
 			ReadJsonValues();
 
 			if (updateDynamically)
@@ -310,32 +287,35 @@ namespace Wave.Essence.Controller.Model
 
 		bool checkShowModel()
 		{
-			if (Interop.WVR_IsInputFocusCapturedBySystem() || !inputDevice.isValid)
-				return false;
+			bool hasFocus = !Interop.WVR_IsInputFocusCapturedBySystem();
+			bool interacable = (!checkInteractionMode || ClientInterface.InteractionMode == XR_InteractionMode.Controller);
 
-			if (checkInteractionMode && (ClientInterface.InteractionMode != XR_InteractionMode.Controller))
-				return false;
+			bool show = hasFocus && m_Connected && interacable && m_Tracked;
+			INTERVAL("checkShowModel() show: " + show
+				+ ", hasFocus: " + hasFocus
+				+ ", connected: " + m_Connected
+				+ ", interacable: " + interacable + ", checkInteractionMode: " + checkInteractionMode
+				+ ", tracked: " + m_Tracked);
 
-			inputDevice.TryGetFeatureValue(CommonUsages.isTracked, out bool validPose);
-			
-			return validPose;
+			return show;
 		}
 
-		// Update is called once per frame
 		void Update()
 		{
+			logFrame++;
+			logFrame %= 300;
+			printIntervalLog = (logFrame == 0);
+
+			m_Connected = WXRDevice.IsConnected((XR_Device)WhichHand);
+			m_Tracked = WXRDevice.IsTracked((XR_Device)WhichHand);
+
 			if (mLoadingState == LoadingState.LoadingState_NOT_LOADED)
 			{
-				InputDevice device = InputDevices.GetDeviceAtXRNode(node);
-
-				if (device.isValid && device.TryGetFeatureValue(CommonUsages.isTracked, out bool validPoseState)
-					&& validPoseState)
+				if (m_Tracked)
 				{
 					WVR_DeviceType type = CheckDeviceType();
 
-					this.connected = true;
 					PrintDebugLog("spawn render model");
-					inputDevice = device;
 					onLoadController(type);
 				}
 			}
@@ -384,12 +364,12 @@ namespace Wave.Essence.Controller.Model
 				}
 			}
 
-			if (Log.gpl.Print)
+			if (printIntervalLog)
 			{
 				var p = transform.position;
 				var sb = Log.CSB
 					.Append("Update() hand=").Append(WhichHand)
-					.Append(", connect=").Append(connected)
+					.Append(", connect=").Append(m_Connected)
 					.Append(", child=").Append(transform.childCount)
 					.Append(", showBattery=").Append(showBatterIndicator)
 					.Append(", hasBattery=").Append(isBatteryIndicatorReady)
@@ -865,7 +845,6 @@ namespace Wave.Essence.Controller.Model
 			DeleteChild();
 			DestroySpawnedController();
 
-			this.connected = false;
 			mLoadingState = LoadingState.LoadingState_NOT_LOADED;
 			onRenderModelRemoved?.Invoke(WhichHand);
 
@@ -909,9 +888,7 @@ namespace Wave.Essence.Controller.Model
 			if (mLoadingState != LoadingState.LoadingState_LOADED)
 				return;
 
-			this.connected = CheckConnection();
-
-			if (this.connected)
+			if (m_Connected)
 			{
 				WVR_DeviceType type = CheckDeviceType();
 
@@ -927,19 +904,6 @@ namespace Wave.Essence.Controller.Model
 				DestroyRenderModel("Destroy controller prefeb because it is disconnect");
 			}
 			return;
-		}
-
-		private bool CheckConnection()
-		{
-#if UNITY_EDITOR
-			if (!EnableDirectPreview)
-				return true;
-#endif
-			// InputDevice is a struct.  Therefore GetDeviceAtXRNode will never return null.
-			if (!inputDevice.isValid)
-				inputDevice = InputDevices.GetDeviceAtXRNode(node);
-
-			return inputDevice.isValid;
 		}
 
 		private WVR_DeviceType CheckDeviceType()
