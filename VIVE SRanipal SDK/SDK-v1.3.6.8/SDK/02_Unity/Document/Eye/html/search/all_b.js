@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['timestamp',['timestamp',['../struct_vive_s_r_1_1anipal_1_1_eye_1_1_eye_data.html#a255e87b762926b60703fd3406abd38ff',1,'ViveSR.anipal.Eye.EyeData.timestamp()'],['../struct_vive_s_r_1_1anipal_1_1_eye_1_1_eye_data__v2.html#aff33e1473f2a04f04ef9e00ee620f32c',1,'ViveSR.anipal.Eye.EyeData_v2.timestamp()']]],
+  ['trackingimprovements',['TrackingImprovements',['../struct_vive_s_r_1_1anipal_1_1_eye_1_1_tracking_improvements.html',1,'ViveSR::anipal::Eye']]],
+  ['trygaze',['TryGaze',['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye.html#a2f556ec16919b43325ba0dfa991c6e22',1,'ViveSR.anipal.Eye.SRanipal_Eye.TryGaze(SingleEyeDataValidity validity, out GazeIndex gazeIndex, EyeData eye_data)'],['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye.html#a4a3de44e33d2ed7e30208bc673705f19',1,'ViveSR.anipal.Eye.SRanipal_Eye.TryGaze(SingleEyeDataValidity validity, out GazeIndex gazeIndex)'],['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye__v2.html#adfa02cf516c4e0d7cccd911cb55a780a',1,'ViveSR.anipal.Eye.SRanipal_Eye_v2.TryGaze(SingleEyeDataValidity validity, out GazeIndex gazeIndex, EyeData_v2 eye_data)'],['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye__v2.html#a606ecf4bfb963d156b6a45f1d78a2e90',1,'ViveSR.anipal.Eye.SRanipal_Eye_v2.TryGaze(SingleEyeDataValidity validity, out GazeIndex gazeIndex)']]]
+];

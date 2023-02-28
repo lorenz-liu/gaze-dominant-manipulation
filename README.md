@@ -5,6 +5,8 @@ Design and Implementation of a Head-eye Collaborative Object Manipulation Method
 
 OS: Windows 10+
 
+HMD: VIVE Focus 3 (**LETHALLY IMPORTANT: Please make sure the HMD's version is up-to-date!**)
+
 Please install by order in case config chaos:
 
 * [INSTALL](https://unity.com/download) Unity Hub
@@ -84,4 +86,4 @@ Please install by order in case config chaos:
 
 ## Last Updated
 
-January 13, 2023
+Feb 28, 2023

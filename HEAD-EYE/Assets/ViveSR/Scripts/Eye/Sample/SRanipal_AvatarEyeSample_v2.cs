@@ -73,7 +73,7 @@ namespace ViveSR
                             eye_callback_registered = false;
                         }
                         else if (SRanipal_Eye_Framework.Instance.EnableEyeDataCallback == false)
-                            SRanipal_Eye_API.GetEyeData_v2(ref eyeData);
+                            SRanipal_Eye_API.GetEyeData_v2(ref eyeData); 
 
                         bool isLeftEyeActive = false;
                         bool isRightEyeAcitve = false;

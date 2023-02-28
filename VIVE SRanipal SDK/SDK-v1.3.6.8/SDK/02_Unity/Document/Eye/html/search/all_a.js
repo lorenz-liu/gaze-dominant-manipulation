@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['sensitive_5ffactor',['sensitive_factor',['../struct_vive_s_r_1_1anipal_1_1_eye_1_1_gaze_ray_parameter.html#a8b0f3ec39e9d93dcde0192f3c90d1c52',1,'ViveSR::anipal::Eye::GazeRayParameter']]],
+  ['seteyeparameter',['SetEyeParameter',['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye___a_p_i.html#a240cf3b32dcc399bf4c2b5c674ded4ae',1,'ViveSR::anipal::Eye::SRanipal_Eye_API']]],
+  ['single_5feye_5fdata_5feye_5fopenness_5fvalidity',['SINGLE_EYE_DATA_EYE_OPENNESS_VALIDITY',['../namespace_vive_s_r_1_1anipal_1_1_eye.html#aea2dff7146893a7a202b54d4b4580f54a84da501707079a6e16d79ad457b782fb',1,'ViveSR::anipal::Eye']]],
+  ['single_5feye_5fdata_5fgaze_5fdirection_5fvalidity',['SINGLE_EYE_DATA_GAZE_DIRECTION_VALIDITY',['../namespace_vive_s_r_1_1anipal_1_1_eye.html#aea2dff7146893a7a202b54d4b4580f54a083dad8ab429868554568da58ca4f1ea',1,'ViveSR::anipal::Eye']]],
+  ['single_5feye_5fdata_5fgaze_5forigin_5fvalidity',['SINGLE_EYE_DATA_GAZE_ORIGIN_VALIDITY',['../namespace_vive_s_r_1_1anipal_1_1_eye.html#aea2dff7146893a7a202b54d4b4580f54a7f6ad1a5cea4e8ac08cb69f83252dc48',1,'ViveSR::anipal::Eye']]],
+  ['single_5feye_5fdata_5fpupil_5fdiameter_5fvalidity',['SINGLE_EYE_DATA_PUPIL_DIAMETER_VALIDITY',['../namespace_vive_s_r_1_1anipal_1_1_eye.html#aea2dff7146893a7a202b54d4b4580f54ab8e90816483c108e3d3043f9f4b14489',1,'ViveSR::anipal::Eye']]],
+  ['single_5feye_5fdata_5fpupil_5fposition_5fin_5fsensor_5farea_5fvalidity',['SINGLE_EYE_DATA_PUPIL_POSITION_IN_SENSOR_AREA_VALIDITY',['../namespace_vive_s_r_1_1anipal_1_1_eye.html#aea2dff7146893a7a202b54d4b4580f54a3c0123f9e46bd965e659d809f3b12ab8',1,'ViveSR::anipal::Eye']]],
+  ['singleeyedata',['SingleEyeData',['../struct_vive_s_r_1_1anipal_1_1_eye_1_1_single_eye_data.html',1,'ViveSR::anipal::Eye']]],
+  ['singleeyedatavalidity',['SingleEyeDataValidity',['../namespace_vive_s_r_1_1anipal_1_1_eye.html#aea2dff7146893a7a202b54d4b4580f54',1,'ViveSR::anipal::Eye']]],
+  ['singleeyeexpression',['SingleEyeExpression',['../struct_vive_s_r_1_1anipal_1_1_eye_1_1_single_eye_expression.html',1,'ViveSR::anipal::Eye']]],
+  ['sranipal_5fapi',['SRanipal_API',['../class_vive_s_r_1_1anipal_1_1_s_ranipal___a_p_i.html',1,'ViveSR::anipal']]],
+  ['sranipal_5favatareyesample_5fv2',['SRanipal_AvatarEyeSample_v2',['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___avatar_eye_sample__v2.html',1,'ViveSR::anipal::Eye']]],
+  ['sranipal_5feye',['SRanipal_Eye',['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye.html',1,'ViveSR::anipal::Eye']]],
+  ['sranipal_5feye_5fapi',['SRanipal_Eye_API',['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye___a_p_i.html',1,'ViveSR::anipal::Eye']]],
+  ['sranipal_5feye_5fframework',['SRanipal_Eye_Framework',['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye___framework.html',1,'ViveSR::anipal::Eye']]],
+  ['sranipal_5feye_5fv2',['SRanipal_Eye_v2',['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye__v2.html',1,'ViveSR::anipal::Eye']]],
+  ['sranipal_5feyefocussample_5fv2',['SRanipal_EyeFocusSample_v2',['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye_focus_sample__v2.html',1,'ViveSR::anipal::Eye']]],
+  ['sranipal_5fgazeraysample_5fv2',['SRanipal_GazeRaySample_v2',['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___gaze_ray_sample__v2.html',1,'ViveSR::anipal::Eye']]],
+  ['sranipal_5fmirrorcamerasample_5feye_5fv2',['SRanipal_MirrorCameraSample_Eye_v2',['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___mirror_camera_sample___eye__v2.html',1,'ViveSR::anipal::Eye']]],
+  ['status',['Status',['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye___framework.html#a67c772c6a4455175b2830eaf83a12f1c',1,'ViveSR::anipal::Eye::SRanipal_Eye_Framework']]],
+  ['supportedeyeversion',['SupportedEyeVersion',['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye___framework.html#a43f9d2d7b547771baf945e1c9d63c1f2',1,'ViveSR::anipal::Eye::SRanipal_Eye_Framework']]]
+];
