@@ -1,0 +1,33 @@
+{
+    "name": "New Controls",
+    "maps": [
+        {
+            "name": "EyeGaze",
+            "id": "cf8ec61d-9efd-4fe5-b61a-8f1e522106a6",
+            "actions": [
+                {
+                    "name": "Pose",
+                    "type": "Value",
+                    "id": "82481dc5-441f-4aa4-886a-b8a835248680",
+                    "expectedControlType": "Pose",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d3fef81e-6042-4ac6-8916-dacad354be42",
+                    "path": "<EyeGaze>/pose",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pose",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
