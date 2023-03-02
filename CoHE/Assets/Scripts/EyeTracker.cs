@@ -15,7 +15,15 @@ class EyeTracker : MonoBehaviour
     {
         _facialManager.StartFramework(XrFacialTrackingTypeHTC.XR_FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC);
 
-        var creatingPath = _logFolder + DateTime.Now;
+        var creatingPath = _logFolder + 
+                           DateTime.Now.Year + "-" + 
+                           DateTime.Now.Month + "-" + 
+                           DateTime.Now.Day + "-" + 
+                           DateTime.Now.Hour + "-" + 
+                           DateTime.Now.Minute + "-" + 
+                           DateTime.Now.Second + "-" +
+                           DateTime.Now.Millisecond + 
+                           ".txt";
         File.CreateText(creatingPath);
         LogHelper.Success("Create log file at " + creatingPath);
     }
