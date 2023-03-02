@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
 
-public class LogHelper
+public static class LogHelper
 {
-    public static void Success(string info)
+    public static void Success(object info)
     {
         Debug.Log("SUCCESS: " + info);
+    }
+
+    public static void Failure(object info)
+    {
+        Debug.Log("Failure: " + info);
     }
 }
