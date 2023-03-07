@@ -3,6 +3,7 @@ using UnityEngine;
 using VIVE.FacialTracking;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using VIVE;
 
 class EyeTracker : MonoBehaviour
@@ -11,7 +12,17 @@ class EyeTracker : MonoBehaviour
     private static Dictionary<XrEyeShapeHTC, float> _eyeDataMap = new();
     private readonly string _logFolder = @"Logs\EyeData\";
     private StreamWriter _logWriter;
+    private Watcher _watcher;
 
+    [Serialize] 
+    public int idleFrames;
+    private int _countIdleFrames;
+    [Serialize] public GameObject idleScreen;
+    
+    [Serialize] 
+    public bool enableBlinkingTest;
+    
+    
     private void Start()
     {
         _facialManager.StartFramework(XrFacialTrackingTypeHTC.XR_FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC);
@@ -37,12 +48,35 @@ class EyeTracker : MonoBehaviour
         {
             LogHelper.Failure("Cannot find this directory! Please check if there are ambiguous symbols in the path. ");
         }
+
+        _watcher = new Watcher();
     }
 
     private void Update()
     {
+        if (++_countIdleFrames <= idleFrames)
+        {
+            idleScreen.GetComponent<UnityEngine.UI.Text>().text = _countIdleFrames < idleFrames - 50 ? "Get Ready..." : "Go!";
+            return;
+        }
+        
+        if (!idleScreen.IsDestroyed())
+            Destroy(idleScreen);
+
         _facialManager.GetWeightings(out _eyeDataMap);
         WriteLog();
+
+        if (_watcher.DoubleBlinkingOccurs(_eyeDataMap))
+        {
+            if (enableBlinkingTest)
+            {
+                var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                cube.transform.localScale *= 0.1f;
+                cube.transform.position = new Vector3(0f, 1f, -9f);
+                var cubeRigidBody = cube.AddComponent<Rigidbody>();
+                cubeRigidBody.useGravity = true;
+            }
+        }
     }
 
     private void WriteLog()
