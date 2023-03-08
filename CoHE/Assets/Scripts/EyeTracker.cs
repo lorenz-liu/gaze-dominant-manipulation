@@ -9,23 +9,21 @@ using VIVE;
 class EyeTracker : MonoBehaviour
 {
     private readonly FacialManager _facialManager = new();
-    private static Dictionary<XrEyeShapeHTC, float> _eyeDataMap = new();
-    private readonly string _logFolder = @"Logs\EyeData\";
+    private Dictionary<XrEyeShapeHTC, float> _eyeDataMap = new();
+    private const string LOGFolder = @"Logs\EyeData\";
     private StreamWriter _logWriter;
     private Watcher _watcher;
-
-    [Serialize] public int idleFrames;
-    private int _countIdleFrames;
-    [Serialize] public GameObject idleScreen;
+    public bool doubleBlinking;
+    
     [Serialize] public GameObject avatar;
     [Serialize] public bool enableBlinkingTest;
     
     
-    private void Start()
+    private void Awake()
     {
         _facialManager.StartFramework(XrFacialTrackingTypeHTC.XR_FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC);
 
-        var creatingPath = _logFolder + 
+        var creatingPath = LOGFolder + 
                            DateTime.Now.Year + "-" + 
                            DateTime.Now.Month + "-" + 
                            DateTime.Now.Day + "-" + 
@@ -50,22 +48,14 @@ class EyeTracker : MonoBehaviour
         _watcher = new Watcher();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (++_countIdleFrames <= idleFrames)
-        {
-            idleScreen.GetComponent<UnityEngine.UI.Text>().text = _countIdleFrames < idleFrames - 50 ? "Get Ready..." : "Go!";
-            return;
-        }
-        
-        if (!idleScreen.IsDestroyed())
-            Destroy(idleScreen);
-
         _facialManager.GetWeightings(out _eyeDataMap);
         WriteLog();
 
         if (_watcher.DoubleBlinkingOccurs(_eyeDataMap))
         {
+            doubleBlinking = true;
             if (enableBlinkingTest)
             {
                 var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -75,6 +65,10 @@ class EyeTracker : MonoBehaviour
                 var cubeRigidBody = cube.AddComponent<Rigidbody>();
                 cubeRigidBody.useGravity = true;
             }
+        }
+        else
+        {
+            doubleBlinking = false;
         }
     }
 
