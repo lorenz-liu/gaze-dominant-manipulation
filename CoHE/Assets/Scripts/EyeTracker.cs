@@ -14,13 +14,11 @@ class EyeTracker : MonoBehaviour
     private StreamWriter _logWriter;
     private Watcher _watcher;
 
-    [Serialize] 
-    public int idleFrames;
+    [Serialize] public int idleFrames;
     private int _countIdleFrames;
     [Serialize] public GameObject idleScreen;
-    
-    [Serialize] 
-    public bool enableBlinkingTest;
+    [Serialize] public GameObject avatar;
+    [Serialize] public bool enableBlinkingTest;
     
     
     private void Start()
@@ -71,8 +69,9 @@ class EyeTracker : MonoBehaviour
             if (enableBlinkingTest)
             {
                 var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                var sourceCor = avatar.transform.position;
                 cube.transform.localScale *= 0.1f;
-                cube.transform.position = new Vector3(0f, 1f, -9f);
+                cube.transform.position = new Vector3(sourceCor.x, sourceCor.y, sourceCor.z);
                 var cubeRigidBody = cube.AddComponent<Rigidbody>();
                 cubeRigidBody.useGravity = true;
             }

@@ -10,17 +10,14 @@ namespace Samples.VIVE_OpenXR_Plugin___Windows._1._0._10.FacialTracking_Example.
         void Start()
         {
             var position = camera.position;
-            this.transform.position = new Vector3(position.x + 0.8f, position.y, position.z + 2f);
-            this.transform.Rotate(0, 30.0f, 0);
+            transform.position = new Vector3(position.x, position.y - 0.2f, position.z + 2f);
         }
 
         // Update is called once per frame
         void Update()
         {
-            var transform1 = this.transform;
-            var position = transform1.position;
-            position = new Vector3(position.x, position.y, position.z);
-            transform1.position = position;
+            var position = camera.position;
+            transform.position = new Vector3(position.x, position.y - 0.2f, position.z + 2f);
         }
     }
 }

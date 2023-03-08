@@ -5,7 +5,7 @@ using VIVE;
 public class Watcher
 {
     private bool _firstOfDoubleBlinkingOccurs;
-    private const float Tolerance = 0.25f;
+    private const float Tolerance = 0.5f;
     private const int FrameCycle = 150;
     private int _frameCount;
     private bool _waitForAnotherBlinking = true;
