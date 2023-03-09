@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.034480397, y: 0.008242355, z: 0.078922845}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3051409913850609595}
   m_RootOrder: 0
@@ -93,7 +94,6 @@ GameObject:
   - component: {fileID: 3051409913850609595}
   - component: {fileID: 3051409913860149339}
   - component: {fileID: 3051409913850733895}
-  - component: {fileID: 3051409913850733890}
   m_Layer: 0
   m_Name: Avatar_Shieh_V2
   m_TagString: Untagged
@@ -111,6 +111,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.04, z: -0.158}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3051409913850609593}
   - {fileID: 3051409913850609599}
@@ -120,7 +121,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3051409913860149339
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -133,10 +134,11 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &3051409913850733895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,22 +230,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   NeededToGetData: 1
---- !u!114 &3051409913850733890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3051409913850635163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42350b51669fc604cb2cad73c39f116c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LipShapeTables:
-  - skinnedMeshRenderer: {fileID: 3051409913864302235}
-    lipShapes: 010000000000000002000000030000000400000006000000050000000800000007000000090000000a0000000b0000000d0000000c0000000f0000000e00000011000000100000001200000014000000130000001600000015000000170000001800000019000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1a000000200000001b0000001c0000001d0000001e0000001f00000022000000210000002400000023000000
-  NeededToGetData: 1
 --- !u!1 &3051409913850635165
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,6 +257,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: -0.05097887, z: 0.004202667}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3051409913850609595}
   m_RootOrder: 2
@@ -409,6 +396,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.034480397, y: 0.008242355, z: 0.078922845}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3051409913850609595}
   m_RootOrder: 1
