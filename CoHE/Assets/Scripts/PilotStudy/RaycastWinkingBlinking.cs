@@ -13,6 +13,7 @@ namespace PilotStudy
         public EyeTracker eyeTracker;
         public SystemStateMachine systemStateMachine;
         public bool winking;
+        public PilotStudyWinkingBlinking pilotStudyWinkingBlinking;
 
         private LineRenderer _lineRenderer;
 
@@ -35,6 +36,7 @@ namespace PilotStudy
                 _lineRenderer.SetPosition(1, hit.point);
                 // Selecting Action Starts: 
                 Destroy(hit.transform.gameObject);
+                ++pilotStudyWinkingBlinking.DestroyedCount;
                 // Selecting Action Ends. 
             }
             else

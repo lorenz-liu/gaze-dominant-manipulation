@@ -438,6 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07f9ff9cc1f445ab27c4ddce1ca2ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyedCount: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,6 +804,7 @@ MonoBehaviour:
   eyeTracker: {fileID: 602519478}
   systemStateMachine: {fileID: 1752326194}
   winking: 0
+  pilotStudyWinkingBlinking: {fileID: 915591807}
 --- !u!1 &1517811809
 GameObject:
   m_ObjectHideFlags: 0
