@@ -9,6 +9,7 @@ class Raycast : MonoBehaviour
     public float range;
     public float renderDuration;
     public EyeTracker eyeTracker;
+    public SystemStateMachine systemStateMachine;
     public bool winking;
 
     private LineRenderer _lineRenderer;
@@ -21,9 +22,10 @@ class Raycast : MonoBehaviour
     private void Update()
     {
         if (winking ? !eyeTracker.GetWinking() : !eyeTracker.GetDoubleBlinking()) return;
+        if (systemStateMachine.GetCurrentState() != State.Idle) return;
         
         LogHelper.Success("Raycast tries to select. ");
-        
+                    
         _lineRenderer.SetPosition(0, raycastOrigin.position);
         var rayOrigin = playerCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
         if (Physics.Raycast(rayOrigin, playerCamera.transform.forward, out var hit, range))
@@ -37,7 +39,7 @@ class Raycast : MonoBehaviour
         {
             _lineRenderer.SetPosition(1, rayOrigin + (playerCamera.transform.forward * range));
         }
-
+            
         StartCoroutine(RenderRaycast());
     }
 
