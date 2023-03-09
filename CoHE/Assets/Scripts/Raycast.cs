@@ -33,7 +33,9 @@ class Raycast : MonoBehaviour
             if (Physics.Raycast(rayOrigin, playerCamera.transform.forward, out var hit, range))
             {
                 _lineRenderer.SetPosition(1, hit.point);
+                // Selecting Action Starts: 
                 Destroy(hit.transform.gameObject);
+                // Selecting Action Ends. 
             }
             else
             {
