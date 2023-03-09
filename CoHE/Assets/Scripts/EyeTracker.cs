@@ -13,10 +13,11 @@ class EyeTracker : MonoBehaviour
     private const string LOGFolder = @"Logs\EyeData\";
     private StreamWriter _logWriter;
     private Watcher _watcher;
-    public bool doubleBlinking;
+    private bool _doubleBlinking;
+    private bool _winking;
     
     [Serialize] public GameObject avatar;
-    [Serialize] public bool enableBlinkingTest;
+    [Serialize] public bool enableSelectionTest;
     
     
     private void Awake()
@@ -55,20 +56,34 @@ class EyeTracker : MonoBehaviour
 
         if (_watcher.DoubleBlinkingOccurs(_eyeDataMap))
         {
-            doubleBlinking = true;
-            if (enableBlinkingTest)
-            {
-                var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                var sourceCor = avatar.transform.position;
-                cube.transform.localScale *= 0.1f;
-                cube.transform.position = new Vector3(sourceCor.x, sourceCor.y, sourceCor.z);
-                var cubeRigidBody = cube.AddComponent<Rigidbody>();
-                cubeRigidBody.useGravity = true;
-            }
+            _doubleBlinking = true;
+            if (!enableSelectionTest) return;
+            var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            var sourceCor = avatar.transform.position;
+            cube.transform.localScale *= 0.1f;
+            cube.transform.position = new Vector3(sourceCor.x, sourceCor.y, sourceCor.z);
+            var cubeRigidBody = cube.AddComponent<Rigidbody>();
+            cubeRigidBody.useGravity = true;
         }
         else
         {
-            doubleBlinking = false;
+            _doubleBlinking = false;
+        }
+        
+        if (_watcher.WinkingOccurs(_eyeDataMap))
+        {
+            _winking = true;
+            if (!enableSelectionTest) return;
+            var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            var sourceCor = avatar.transform.position;
+            cube.transform.localScale *= 0.1f;
+            cube.transform.position = new Vector3(sourceCor.x, sourceCor.y, sourceCor.z);
+            var cubeRigidBody = cube.AddComponent<Rigidbody>();
+            cubeRigidBody.useGravity = true;
+        }
+        else
+        {
+            _winking = false;
         }
     }
 
@@ -93,5 +108,15 @@ class EyeTracker : MonoBehaviour
         // XR_EYE_EXPRESSION_RIGHT_OUT_HTC
         // XR_EYE_EXPRESSION_LEFT_UP_HTC
         // XR_EYE_EXPRESSION_RIGHT_UP_HTC
+    }
+
+    public bool GetDoubleBlinking()
+    {
+        return _doubleBlinking;
+    }
+
+    public bool GetWinking()
+    {
+        return _winking;
     }
 }
