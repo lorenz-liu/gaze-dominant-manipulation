@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = System.Random;
 
@@ -17,13 +18,13 @@ namespace PilotStudy
         [NonSerialized] public int DestroyedCount;
         private Stopwatch _stopwatch;
         private int _selectingActionCount;
-        private const int TestTimes = 5;
+        [Serialize] public int testTimes;
         private StreamWriter _logWriter;
 
         private void Start()
         {
             _random = new Random();
-            _interval = _random.Next(300, 500);
+            _interval = 400;
             
             const string logFolder = @"PilotStudy\WinkingVSBlinking\";
             var creatingPath = logFolder + 
@@ -77,13 +78,13 @@ namespace PilotStudy
 
         private void Update()
         {
-            if (DestroyedCount >= TestTimes)
+            if (DestroyedCount >= testTimes)
             {
                 _stopwatch.Stop();
                 var timeSpan = _stopwatch.Elapsed;
                 
                 _logWriter.WriteLine("{0,30}{1,30}{2,30}{3,30}", "Time Spent", "Destroyed Count", "Selecting Action Count", "Feedback Accuracy Index");
-                _logWriter.WriteLine("{0,30}{1,30}{2,30}{3,30}", timeSpan.Hours * 60 * 60 * 1000 + timeSpan.Minutes * 60 * 1000 + timeSpan.Seconds * 1000 + timeSpan.Milliseconds, TestTimes, _selectingActionCount, (float) TestTimes / _selectingActionCount);
+                _logWriter.WriteLine("{0,30}{1,30}{2,30}{3,30}", timeSpan.Hours * 60 * 60 * 1000 + timeSpan.Minutes * 60 * 1000 + timeSpan.Seconds * 1000 + timeSpan.Milliseconds, testTimes, _selectingActionCount, (float) testTimes / _selectingActionCount);
 
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
@@ -99,7 +100,6 @@ namespace PilotStudy
             if (++_countInterval <= _interval) return;
             CreateRandomTarget();
             _countInterval = 0;
-            _interval = _random.Next(300, 500);
         }
     }
 }
