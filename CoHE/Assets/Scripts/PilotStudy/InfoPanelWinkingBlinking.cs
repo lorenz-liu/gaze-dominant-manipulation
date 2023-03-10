@@ -16,8 +16,8 @@ namespace PilotStudy
 
         private string GenerateInfo()
         {
-            return $"{"Selection Signal: ",20}{(raycast.winking ? "Winking" : "Double Blinking"),10}\n" +
-                   $"{"Destroyed Spheres: ",20}{study.DestroyedCount, 10}";
+            return $"Selection Signal: {(raycast.winking ? "Winking" : "Double Blinking")}\n" +
+                   $"Destroyed Spheres: {study.DestroyedCount}";
         }
     }
 }
