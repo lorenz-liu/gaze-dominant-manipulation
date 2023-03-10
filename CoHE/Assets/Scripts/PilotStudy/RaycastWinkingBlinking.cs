@@ -37,6 +37,8 @@ namespace PilotStudy
                 // Selecting Action Starts: 
                 Destroy(hit.transform.gameObject);
                 ++pilotStudyWinkingBlinking.DestroyedCount;
+                pilotStudyWinkingBlinking.CanCreateNext = true;
+                pilotStudyWinkingBlinking.CountInterval = 0;
                 // Selecting Action Ends. 
             }
             else

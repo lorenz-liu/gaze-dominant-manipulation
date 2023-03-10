@@ -899,6 +899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycast: {fileID: 1459719713}
+  study: {fileID: 915591807}
 --- !u!1 &1641960074
 GameObject:
   m_ObjectHideFlags: 0

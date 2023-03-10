@@ -14,12 +14,13 @@ namespace PilotStudy
         private const float Distance = 15f;
         private Random _random;
         private int _interval;
-        private int _countInterval;
+        [NonSerialized] public int CountInterval;
         [NonSerialized] public int DestroyedCount;
         private Stopwatch _stopwatch;
         private int _selectingActionCount;
         [Serialize] public int testTimes;
         private StreamWriter _logWriter;
+        [NonSerialized] public bool CanCreateNext = true;
 
         private void Start()
         {
@@ -74,6 +75,8 @@ namespace PilotStudy
                     _target.transform.position = new Vector3(-Radius / 2 * (float)Math.Sqrt(3), Radius / 2, Distance);
                     break;
             }
+
+            CanCreateNext = false;
         }
 
         private void Update()
@@ -97,9 +100,8 @@ namespace PilotStudy
             if (Input.GetKeyDown(KeyCode.Space))
                 ++_selectingActionCount;
             
-            if (++_countInterval <= _interval) return;
+            if (!CanCreateNext || ++CountInterval <= _interval) return;
             CreateRandomTarget();
-            _countInterval = 0;
         }
     }
 }
