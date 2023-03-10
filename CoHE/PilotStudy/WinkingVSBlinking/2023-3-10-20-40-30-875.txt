@@ -1,2 +1,0 @@
-                    Time Spent               Destroyed Count        Selecting Action Count       Feedback Accuracy Index
-                        142648                            20                            29                     0.6896552
