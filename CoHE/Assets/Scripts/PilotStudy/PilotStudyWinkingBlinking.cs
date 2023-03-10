@@ -18,11 +18,28 @@ namespace PilotStudy
         private Stopwatch _stopwatch;
         private int _selectingActionCount;
         private const int TestTimes = 5;
+        private StreamWriter _logWriter;
 
         private void Start()
         {
             _random = new Random();
             _interval = _random.Next(300, 500);
+            
+            const string logFolder = @"PilotStudy\WinkingVSBlinking\";
+            var creatingPath = logFolder + 
+                               DateTime.Now.Year + "-" + 
+                               DateTime.Now.Month + "-" + 
+                               DateTime.Now.Day + "-" + 
+                               DateTime.Now.Hour + "-" + 
+                               DateTime.Now.Minute + "-" + 
+                               DateTime.Now.Second + "-" +
+                               DateTime.Now.Millisecond + 
+                               ".txt";
+            var fs = new FileStream(creatingPath, FileMode.Create);
+            fs.Dispose();
+            LogHelper.Success("Create pilot study file at " + creatingPath);
+            _logWriter = new StreamWriter(creatingPath);
+            _logWriter.AutoFlush = true;
         }
 
         private void CreateRandomTarget()
@@ -64,22 +81,9 @@ namespace PilotStudy
             {
                 _stopwatch.Stop();
                 var timeSpan = _stopwatch.Elapsed;
-                const string logFolder = @"PilotStudy\WinkingVSBlinking\";
-                var creatingPath = logFolder + 
-                                   DateTime.Now.Year + "-" + 
-                                   DateTime.Now.Month + "-" + 
-                                   DateTime.Now.Day + "-" + 
-                                   DateTime.Now.Hour + "-" + 
-                                   DateTime.Now.Minute + "-" + 
-                                   DateTime.Now.Second + "-" +
-                                   DateTime.Now.Millisecond + 
-                                   ".txt";
-                var fs = new FileStream(creatingPath, FileMode.Create);
-                fs.Dispose();
-                LogHelper.Success("Create pilot study file at " + creatingPath);
-                var logWriter = new StreamWriter(creatingPath);
-                logWriter.WriteLine("{0,30}{1,30}{2,30}", "Time Spent", "Destroyed Count", "Selecting Action Count");
-                logWriter.WriteLine("{0,30}{1,30}{2,30}", timeSpan.Hours * 60 * 60 * 1000 + timeSpan.Minutes * 60 * 1000 + timeSpan.Seconds * 1000 + timeSpan.Milliseconds, TestTimes, _selectingActionCount);
+                
+                _logWriter.WriteLine("{0,30}{1,30}{2,30}{3,30}", "Time Spent", "Destroyed Count", "Selecting Action Count", "Feedback Accuracy Index");
+                _logWriter.WriteLine("{0,30}{1,30}{2,30}{3,30}", timeSpan.Hours * 60 * 60 * 1000 + timeSpan.Minutes * 60 * 1000 + timeSpan.Seconds * 1000 + timeSpan.Milliseconds, TestTimes, _selectingActionCount, (float) TestTimes / _selectingActionCount);
 
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
