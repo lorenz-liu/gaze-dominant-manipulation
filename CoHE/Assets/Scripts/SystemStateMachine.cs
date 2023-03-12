@@ -80,6 +80,7 @@ class SystemStateMachine : MonoBehaviour
         if (_stateMachine.CanTransitTo(nextState))
         {
             _stateMachine = _stateMachine.TransitTo(nextState);
+            LogHelper.Success("Transited to " + nextState);
         }
         else
         {

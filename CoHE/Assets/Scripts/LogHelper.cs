@@ -11,4 +11,8 @@ public static class LogHelper
     {
         Debug.Log("Failure: " + info);
     }
+    public static void Normal(object info)
+    {
+        Debug.Log("Normal: " + info);
+    }
 }
