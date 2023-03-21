@@ -41,6 +41,8 @@ class GazeTracker : MonoBehaviour
         {
             _specInit = false;
         }
+        
+        ListenGaze();
 
         _lastState = systemStateMachine.GetCurrentState();
         switch (_lastState)
@@ -107,18 +109,27 @@ class GazeTracker : MonoBehaviour
 
                 break;
             case State.Idle:
-                var rayInitPos = gazeRayOrigin.transform.position;
-                var endingX = _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_IN_HTC] -
-                              _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_OUT_HTC];
-                var endingY = _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_UP_HTC] -
-                              _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_DOWN_HTC] + playerCamera.transform.position.y;
-                var endingPoint = new Vector3(endingX, endingY, rayInitPos.z * 10);
-                gazeRay.SetPositions(new []{rayInitPos, endingPoint});
                 break;
             case State.ObjectSelected:
                 break;
             default:
                 return;
         }
+    }
+
+    private void ListenGaze()
+    {
+        var rayInitPos = gazeRayOrigin.transform.position;
+        const int rayLength = 40;
+        var cameraTransform = playerCamera.transform;
+        var forward = cameraTransform.forward * rayLength;
+        
+        var endingX = (_eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_IN_HTC] -
+                       _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_OUT_HTC]) * rayLength;
+        var endingY = (_eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_UP_HTC] -
+                       _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_DOWN_HTC]) * rayLength;
+        
+        var endingPoint = new Vector3(endingX + forward.x, endingY + forward.y + cameraTransform.position.y, forward.z);
+        gazeRay.SetPositions(new []{rayInitPos, endingPoint});
     }
 }
