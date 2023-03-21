@@ -120,4 +120,9 @@ class EyeTracker : MonoBehaviour
     {
         return _winking;
     }
+
+    public Dictionary<XrEyeShapeHTC, float> GetEyeDataMap()
+    {
+        return _eyeDataMap;
+    }
 }

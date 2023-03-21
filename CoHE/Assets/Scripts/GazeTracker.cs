@@ -8,6 +8,8 @@ class GazeTracker : MonoBehaviour
     public Raycast raycast;
     public Camera playerCamera;
     public LineRenderer gazeRay;
+    public GameObject gazeRayOrigin;
+    public EyeTracker eyeTracker;
     public float rotationCoefficient;
     public float translationCoefficient;
     public float rescalingCoefficient;
@@ -19,6 +21,8 @@ class GazeTracker : MonoBehaviour
 
     private Quaternion _initSpec;
 
+    private float _co = 0;
+    
     private void Start()
     {
         _specInit = false;
@@ -99,6 +103,10 @@ class GazeTracker : MonoBehaviour
 
                 break;
             case State.Idle:
+                _co += 0.0001f;
+                var rayInitPos = gazeRayOrigin.transform.position;
+                var endingPoint = new Vector3(rayInitPos.x, rayInitPos.y + _co, rayInitPos.z * 10);
+                gazeRay.SetPositions(new []{rayInitPos, endingPoint});
                 break;
             case State.ObjectSelected:
                 break;
