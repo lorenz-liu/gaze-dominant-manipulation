@@ -63,7 +63,6 @@ class Raycast : MonoBehaviour
                 {
                     _currentSelectedObject = _currentGazingObject;
                     systemStateMachine.TransitStateTo(State.ObjectSelected);
-                    systemStateMachine.TransitStateTo(State.ObjectTranslating);
                 }
         
                 StartCoroutine(RenderRaycast());

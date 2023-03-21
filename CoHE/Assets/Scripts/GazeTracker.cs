@@ -2,7 +2,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-class HeadTracker : MonoBehaviour
+class GazeTracker : MonoBehaviour
 {
     private GameObject _selectedObject;
     [Serialize] public SystemStateMachine systemStateMachine;
@@ -99,7 +99,9 @@ class HeadTracker : MonoBehaviour
 
                 break;
             case State.Idle:
+                break;
             case State.ObjectSelected:
+                break;
             default:
                 return;
         }
