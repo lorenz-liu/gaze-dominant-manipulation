@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using VIVE;
 
 class GazeTracker : MonoBehaviour
 {
@@ -14,14 +16,14 @@ class GazeTracker : MonoBehaviour
     public float translationCoefficient;
     public float rescalingCoefficient;
 
+    private Dictionary<XrEyeShapeHTC, float> _eyeDataMap;
+
     private const float TranslationThreshold = 0.1f;
     
     private bool _specInit;
     private State _lastState;
 
     private Quaternion _initSpec;
-
-    private float _co = 0;
     
     private void Start()
     {
@@ -31,6 +33,8 @@ class GazeTracker : MonoBehaviour
 
     private void Update()
     {
+        _eyeDataMap = eyeTracker.GetEyeDataMap();
+        
         _selectedObject = raycast.GetSelectedGameObject();
 
         if (_lastState != systemStateMachine.GetCurrentState())
@@ -103,9 +107,12 @@ class GazeTracker : MonoBehaviour
 
                 break;
             case State.Idle:
-                _co += 0.0001f;
                 var rayInitPos = gazeRayOrigin.transform.position;
-                var endingPoint = new Vector3(rayInitPos.x, rayInitPos.y + _co, rayInitPos.z * 10);
+                var endingX = _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_IN_HTC] -
+                              _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_OUT_HTC];
+                var endingY = _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_UP_HTC] -
+                              _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_DOWN_HTC] + playerCamera.transform.position.y;
+                var endingPoint = new Vector3(endingX, endingY, rayInitPos.z * 10);
                 gazeRay.SetPositions(new []{rayInitPos, endingPoint});
                 break;
             case State.ObjectSelected:
