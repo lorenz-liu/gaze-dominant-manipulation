@@ -18,13 +18,12 @@ class GazeTracker : MonoBehaviour
     public bool showGazeRay;
 
     private Dictionary<XrEyeShapeHTC, float> _eyeDataMap;
-
     private const float TranslationThreshold = 0.1f;
-    
     private bool _specInit;
     private State _lastState;
-
     private Quaternion _initSpec;
+    private float _gazeX;
+    private float _gazeY;
     
     private void Start()
     {
@@ -132,10 +131,20 @@ class GazeTracker : MonoBehaviour
         var endingY = (_eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_UP_HTC] -
                        _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_DOWN_HTC]) * rayLength;
 
-        endingX += forward.x;
-        endingY += forward.y + cameraTransform.position.y;
+        _gazeX = endingX + forward.x;
+        _gazeY = endingY + forward.y + cameraTransform.position.y;
 
-        var endingPoint = new Vector3(endingX, endingY, forward.z);
+        var endingPoint = new Vector3(_gazeX, _gazeY, forward.z);
         gazeRay.SetPositions(new []{rayInitPos, endingPoint});
+    }
+
+    public float GetGazeX()
+    {
+        return _gazeX;
+    }
+
+    public float GetGazeY()
+    {
+        return _gazeY;
     }
 }

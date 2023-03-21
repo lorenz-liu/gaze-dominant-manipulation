@@ -1,16 +1,16 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 class OperationSelector : MonoBehaviour
 {
-    [Serialize] public SystemStateMachine systemStateMachine;
-    [Serialize] public GameObject rotation;
-    [Serialize] public GameObject translation;
-    [Serialize] public GameObject rescaling;
+    public SystemStateMachine systemStateMachine;
+    public GameObject rotation;
+    public GameObject translation;
+    public GameObject rescaling;
+    public GazeTracker gazeTracker;
 
     private void Start()
     {
-        MakeVisible(false);
+        MakeVisible(true);
     }
 
     private void Update()
