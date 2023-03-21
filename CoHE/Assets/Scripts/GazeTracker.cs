@@ -1,6 +1,7 @@
 ﻿using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using VIVE.EyeGaze;
 
 class GazeTracker : MonoBehaviour
 {
