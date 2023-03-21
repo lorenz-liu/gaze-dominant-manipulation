@@ -1,17 +1,16 @@
 ﻿using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using VIVE.EyeGaze;
 
 class GazeTracker : MonoBehaviour
 {
     private GameObject _selectedObject;
-    [Serialize] public SystemStateMachine systemStateMachine;
-    [Serialize] public Raycast raycast;
-    [Serialize] public Camera playerCamera;
-    [Serialize] public float rotationCoefficient;
-    [Serialize] public float translationCoefficient;
-    [Serialize] public float rescalingCoefficient;
+    public SystemStateMachine systemStateMachine;
+    public Raycast raycast;
+    public Camera playerCamera;
+    public LineRenderer gazeRay;
+    public float rotationCoefficient;
+    public float translationCoefficient;
+    public float rescalingCoefficient;
 
     private const float TranslationThreshold = 0.1f;
     
