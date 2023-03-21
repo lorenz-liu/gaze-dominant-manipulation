@@ -723,6 +723,7 @@ MonoBehaviour:
   rotationCoefficient: 5
   translationCoefficient: 5
   rescalingCoefficient: 5
+  showGazeRay: 1
 --- !u!4 &890935098
 Transform:
   m_ObjectHideFlags: 0

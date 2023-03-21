@@ -15,6 +15,7 @@ class GazeTracker : MonoBehaviour
     public float rotationCoefficient;
     public float translationCoefficient;
     public float rescalingCoefficient;
+    public bool showGazeRay;
 
     private Dictionary<XrEyeShapeHTC, float> _eyeDataMap;
 
@@ -29,6 +30,8 @@ class GazeTracker : MonoBehaviour
     {
         _specInit = false;
         _lastState = State.Idle;
+
+        gazeRay.gameObject.SetActive(showGazeRay);
     }
 
     private void Update()
@@ -128,8 +131,11 @@ class GazeTracker : MonoBehaviour
                        _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_OUT_HTC]) * rayLength;
         var endingY = (_eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_UP_HTC] -
                        _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_DOWN_HTC]) * rayLength;
-        
-        var endingPoint = new Vector3(endingX + forward.x, endingY + forward.y + cameraTransform.position.y, forward.z);
+
+        endingX += forward.x;
+        endingY += forward.y + cameraTransform.position.y;
+
+        var endingPoint = new Vector3(endingX, endingY, forward.z);
         gazeRay.SetPositions(new []{rayInitPos, endingPoint});
     }
 }
