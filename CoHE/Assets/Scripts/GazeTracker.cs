@@ -46,62 +46,57 @@ class GazeTracker : MonoBehaviour
         
         ListenGaze();
 
+        if (!_specInit)
+        {
+            _initSpec = playerCamera.transform.rotation;
+            _specInit = true;
+        }
+        
         _lastState = systemStateMachine.GetCurrentState();
         switch (_lastState)
         {
             case State.ObjectTranslating:
-                if (!_specInit)
-                {
-                    _initSpec = playerCamera.transform.rotation;
-                    _specInit = true;
-                }
-
+                if (eyeTracker.GetDoubleBlinking())
+                    systemStateMachine.TransitStateTo(State.ObjectSelected);
+                
                 var curSpc = playerCamera.transform.rotation;
 
-                var xm = Math.Abs(curSpc.x - _initSpec.x) > InteractionThreshold;
-                var ym = Math.Abs(curSpc.y - _initSpec.y) > InteractionThreshold;
+                var xm = Math.Abs(_gazeX) > InteractionThreshold;
+                var ym = Math.Abs(_gazeY) > InteractionThreshold;
                 var zm = Math.Abs(curSpc.z - _initSpec.z) > InteractionThreshold;
 
-                var xn = curSpc.x - _initSpec.x > 0 ? -1 : 1;
-                var yn = curSpc.y - _initSpec.y > 0 ? 1 : -1;
+                var xn = _gazeX > 0 ? -1 : 1;
+                var yn = _gazeY > 0 ? 1 : -1;
                 var zn = curSpc.z - _initSpec.z > 0 ? -1 : 1;
                 
                 _selectedObject.transform.position += new Vector3(
-                    translationCoefficient * (ym ? yn * 0.1f * (Math.Abs(curSpc.y - _initSpec.y) - InteractionThreshold) : 0), 
-                    translationCoefficient * (xm ? xn * 0.1f * (Math.Abs(curSpc.x - _initSpec.x) - InteractionThreshold) : 0), 
+                    translationCoefficient * (ym ? yn * 0.1f * (Math.Abs(_gazeX) - InteractionThreshold) : 0), 
+                    translationCoefficient * (xm ? xn * 0.1f * (Math.Abs(_gazeY) - InteractionThreshold) : 0), 
                     translationCoefficient * (zm ? zn * 0.1f * (Math.Abs(curSpc.z - _initSpec.z) - InteractionThreshold) : 0));
 
                 break;
             case State.ObjectRotating:
-                if (!_specInit)
-                {
-                    _initSpec = playerCamera.transform.rotation;
-                    _specInit = true;
-                }
+                if (eyeTracker.GetDoubleBlinking())
+                    systemStateMachine.TransitStateTo(State.ObjectSelected);
+                
+                xm = Math.Abs(_gazeX) > InteractionThreshold;
+                ym = Math.Abs(_gazeY) > InteractionThreshold;
 
-                curSpc = playerCamera.transform.rotation;
-                _selectedObject.transform.Rotate(
-                    rotationCoefficient * (curSpc.x - _initSpec.x), 
-                    rotationCoefficient * (curSpc.y - _initSpec.y), 
-                    rotationCoefficient * (curSpc.z - _initSpec.z));
+                _selectedObject.transform.Rotate(Vector3.right, xm ? _gazeX : 0);
+                _selectedObject.transform.Rotate(Vector3.up, ym ? _gazeY : 0);
 
                 break;
             case State.ObjectRescaling:
-                if (!_specInit)
-                {
-                    _initSpec = playerCamera.transform.rotation;
-                    _specInit = true;
-                }
-
-                curSpc = playerCamera.transform.rotation;
-
+                if (eyeTracker.GetDoubleBlinking())
+                    systemStateMachine.TransitStateTo(State.ObjectSelected);
+                
                 var localScale = _selectedObject.transform.localScale;
                 var originScale = localScale;
                 var ix = originScale.x;
                 var iy = originScale.y;
                 var iz = originScale.z;
                 var sum = ix + iy + iz;
-                var diff = curSpc.y - _initSpec.y;
+                var diff = _gazeX;
 
                 localScale += new Vector3(
                     ix / sum * diff * rescalingCoefficient, 
@@ -125,16 +120,16 @@ class GazeTracker : MonoBehaviour
         const int rayLength = 40;
         var cameraTransform = playerCamera.transform;
         var forward = cameraTransform.forward * rayLength;
-        
-        var endingX = (_eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_IN_HTC] -
-                       _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_OUT_HTC]) * rayLength;
-        var endingY = (_eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_UP_HTC] -
-                       _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_DOWN_HTC]) * rayLength;
 
-        _gazeX = endingX + forward.x;
-        _gazeY = endingY + forward.y + cameraTransform.position.y;
+        _gazeX = _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_IN_HTC] -
+                 _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_OUT_HTC];
+        _gazeY = _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_UP_HTC] -
+                 _eyeDataMap[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_DOWN_HTC];
 
-        var endingPoint = new Vector3(_gazeX, _gazeY, forward.z);
+        var endingX = _gazeX * rayLength + forward.x;
+        var endingY = _gazeY * rayLength + forward.y + cameraTransform.position.y;
+
+        var endingPoint = new Vector3(endingX, endingY, forward.z);
         gazeRay.SetPositions(new []{rayInitPos, endingPoint});
     }
 

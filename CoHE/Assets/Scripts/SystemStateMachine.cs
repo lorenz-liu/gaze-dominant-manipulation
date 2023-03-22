@@ -58,21 +58,22 @@ class SystemStateMachine : MonoBehaviour
     private void Awake()
     {
         _stateMachine = new StateMachine(State.Idle);
-
-        var objectTranslatingSm = new StateMachine(State.ObjectTranslating);
-        var objectRotatingSm = new StateMachine(State.ObjectRotating);
-        var objectRescalingSm = new StateMachine(State.ObjectRescaling);
         
-        objectTranslatingSm.AttachState(_stateMachine);
-        objectRotatingSm.AttachState(_stateMachine);
-        objectRescalingSm.AttachState(_stateMachine);
-
-        var objectSelectedSm = new StateMachine(State.ObjectSelected);
-        objectSelectedSm.AttachState(objectTranslatingSm);
-        objectSelectedSm.AttachState(objectRotatingSm);
-        objectSelectedSm.AttachState(objectRescalingSm);
+        var selectedSm = new StateMachine(State.ObjectSelected);
+        var translatingSm = new StateMachine(State.ObjectTranslating);
+        var rotatingSm = new StateMachine(State.ObjectRotating);
+        var rescalingSm = new StateMachine(State.ObjectRescaling);
         
-        _stateMachine.AttachState(objectSelectedSm);
+        translatingSm.AttachState(selectedSm);
+        rotatingSm.AttachState(selectedSm);
+        rescalingSm.AttachState(selectedSm);
+        
+        selectedSm.AttachState(translatingSm);
+        selectedSm.AttachState(rotatingSm);
+        selectedSm.AttachState(rescalingSm);
+        selectedSm.AttachState(_stateMachine);
+        
+        _stateMachine.AttachState(selectedSm);
     }
 
     public void TransitStateTo(State nextState)

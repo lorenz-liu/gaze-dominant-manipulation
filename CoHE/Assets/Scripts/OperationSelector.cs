@@ -23,7 +23,6 @@ class OperationSelector : MonoBehaviour
         if (systemStateMachine.GetCurrentState() == State.ObjectSelected)
         {
             MakeVisible(true);
-            LogHelper.Success("selection panel should start. ");
 
             var gazeX = gazeTracker.GetGazeX();
             var gazeY = gazeTracker.GetGazeY();
