@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 class OperationSelector : MonoBehaviour
 {
@@ -6,8 +7,12 @@ class OperationSelector : MonoBehaviour
     public GameObject rotation;
     public GameObject translation;
     public GameObject rescaling;
+    public GameObject cancel;
+    public GameObject prompts;
     public GazeTracker gazeTracker;
 
+    private const float InteractionThreshold = 0.5f;
+    
     private void Start()
     {
         MakeVisible(true);
@@ -19,6 +24,15 @@ class OperationSelector : MonoBehaviour
         {
             MakeVisible(true);
             LogHelper.Success("selection panel should start. ");
+
+            var gazeX = gazeTracker.GetGazeX();
+            var gazeY = gazeTracker.GetGazeY();
+            
+            ProcessGaze(gazeX, gazeY);
+        }
+        else
+        {
+            MakeVisible(false);
         }
     }
 
@@ -27,5 +41,24 @@ class OperationSelector : MonoBehaviour
         rotation.SetActive(v);
         translation.SetActive(v);
         rescaling.SetActive(v);
+        cancel.SetActive(v);
+        prompts.SetActive(v);
+    }
+
+    private void ProcessGaze(float x, float y)
+    {
+        if (x <= -InteractionThreshold && Math.Abs(y) < InteractionThreshold)
+        {
+            systemStateMachine.TransitStateTo(State.ObjectTranslating);
+        } else if (Math.Abs(x) < InteractionThreshold && Math.Abs(y) >= InteractionThreshold)
+        {
+            systemStateMachine.TransitStateTo(State.ObjectRotating);
+        } else if (x >= InteractionThreshold && Math.Abs(y) < InteractionThreshold)
+        {
+            systemStateMachine.TransitStateTo(State.ObjectRescaling);
+        } else if (Math.Abs(x) < InteractionThreshold && Math.Abs(y) <= -InteractionThreshold)
+        {
+            systemStateMachine.TransitStateTo(State.Idle);
+        }
     }
 }

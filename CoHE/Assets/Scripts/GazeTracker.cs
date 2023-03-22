@@ -18,7 +18,7 @@ class GazeTracker : MonoBehaviour
     public bool showGazeRay;
 
     private Dictionary<XrEyeShapeHTC, float> _eyeDataMap;
-    private const float TranslationThreshold = 0.1f;
+    private const float InteractionThreshold = 0.1f;
     private bool _specInit;
     private State _lastState;
     private Quaternion _initSpec;
@@ -58,18 +58,18 @@ class GazeTracker : MonoBehaviour
 
                 var curSpc = playerCamera.transform.rotation;
 
-                var xm = Math.Abs(curSpc.x - _initSpec.x) > TranslationThreshold;
-                var ym = Math.Abs(curSpc.y - _initSpec.y) > TranslationThreshold;
-                var zm = Math.Abs(curSpc.z - _initSpec.z) > TranslationThreshold;
+                var xm = Math.Abs(curSpc.x - _initSpec.x) > InteractionThreshold;
+                var ym = Math.Abs(curSpc.y - _initSpec.y) > InteractionThreshold;
+                var zm = Math.Abs(curSpc.z - _initSpec.z) > InteractionThreshold;
 
                 var xn = curSpc.x - _initSpec.x > 0 ? -1 : 1;
                 var yn = curSpc.y - _initSpec.y > 0 ? 1 : -1;
                 var zn = curSpc.z - _initSpec.z > 0 ? -1 : 1;
                 
                 _selectedObject.transform.position += new Vector3(
-                    translationCoefficient * (ym ? yn * 0.1f * (Math.Abs(curSpc.y - _initSpec.y) - TranslationThreshold) : 0), 
-                    translationCoefficient * (xm ? xn * 0.1f * (Math.Abs(curSpc.x - _initSpec.x) - TranslationThreshold) : 0), 
-                    translationCoefficient * (zm ? zn * 0.1f * (Math.Abs(curSpc.z - _initSpec.z) - TranslationThreshold) : 0));
+                    translationCoefficient * (ym ? yn * 0.1f * (Math.Abs(curSpc.y - _initSpec.y) - InteractionThreshold) : 0), 
+                    translationCoefficient * (xm ? xn * 0.1f * (Math.Abs(curSpc.x - _initSpec.x) - InteractionThreshold) : 0), 
+                    translationCoefficient * (zm ? zn * 0.1f * (Math.Abs(curSpc.z - _initSpec.z) - InteractionThreshold) : 0));
 
                 break;
             case State.ObjectRotating:
