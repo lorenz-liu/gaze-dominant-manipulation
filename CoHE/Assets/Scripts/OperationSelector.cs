@@ -8,7 +8,6 @@ class OperationSelector : MonoBehaviour
     public GameObject translation;
     public GameObject rescaling;
     public GameObject cancel;
-    public GameObject prompts;
     public GazeTracker gazeTracker;
 
     private const float InteractionThreshold = 0.5f;
@@ -41,7 +40,6 @@ class OperationSelector : MonoBehaviour
         translation.SetActive(v);
         rescaling.SetActive(v);
         cancel.SetActive(v);
-        prompts.SetActive(v);
     }
 
     private void ProcessGaze(float x, float y)
