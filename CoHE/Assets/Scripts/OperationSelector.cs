@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 class OperationSelector : MonoBehaviour
 {
@@ -11,7 +10,7 @@ class OperationSelector : MonoBehaviour
     public GameObject rescaling;
     public GameObject cancel;
     public GazeTracker gazeTracker;
-    [FormerlySerializedAs("confirmCircle1")] public ConfirmCircle confirmCircle;
+    public ConfirmCircle confirmCircle;
 
     private const float InteractionThreshold = 0.2f;
     private int _selectingMode;

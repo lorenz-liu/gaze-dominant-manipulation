@@ -25,7 +25,7 @@ class ConfirmCircle : MonoBehaviour
     {
         if (!_activated) return;
         
-        _progress += ++_round * 0.00006f;
+        _progress += ++_round * 0.0001f;
         loadingCircle.transform.localScale = new Vector3(OriginScale * _progress, OriginScale * _progress, loadingCircle.transform.localScale.z);
 
         if (OriginScale * _progress >= OriginScale) 
