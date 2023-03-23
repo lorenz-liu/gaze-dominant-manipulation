@@ -2,9 +2,11 @@
 
 class ConfirmCircle : MonoBehaviour
 {
+    public GazeTracker gazeTracker;
+    public Camera playerCamera;
     public GameObject fullCircle;
     public GameObject loadingCircle;
-    
+
     private float _progress;
     private int _round;
     private bool _activated;
@@ -24,7 +26,14 @@ class ConfirmCircle : MonoBehaviour
     private void Update()
     {
         if (!_activated) return;
-        
+
+        var forward = playerCamera.transform.forward;
+        var pos = new Vector3(
+            10 * (gazeTracker.GetGazeX() + forward.x),
+            10 * (gazeTracker.GetGazeY() + forward.y), 
+            10 * forward.z);
+        transform.position = pos;
+
         _progress += ++_round * 0.0001f;
         loadingCircle.transform.localScale = new Vector3(OriginScale * _progress, OriginScale * _progress, loadingCircle.transform.localScale.z);
 
