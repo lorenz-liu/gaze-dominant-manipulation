@@ -66,12 +66,12 @@ class GazeTracker : MonoBehaviour
                 var zm = Math.Abs(curSpc.z - _initSpec.z) > InteractionThreshold;
 
                 var xn = _gazeX > 0 ? -1 : 1;
-                var yn = _gazeY > 0 ? 1 : -1;
+                var yn = _gazeY > 0 ? -1 : 1;
                 var zn = curSpc.z - _initSpec.z > 0 ? -1 : 1;
                 
                 _selectedObject.transform.position += new Vector3(
-                    translationCoefficient * (ym ? yn * 0.1f * (Math.Abs(_gazeX) - InteractionThreshold) : 0), 
                     translationCoefficient * (xm ? xn * 0.1f * (Math.Abs(_gazeY) - InteractionThreshold) : 0), 
+                    translationCoefficient * (ym ? yn * 0.1f * (Math.Abs(_gazeX) - InteractionThreshold) : 0), 
                     translationCoefficient * (zm ? zn * 0.1f * (Math.Abs(curSpc.z - _initSpec.z) - InteractionThreshold) : 0));
 
                 break;
@@ -82,8 +82,8 @@ class GazeTracker : MonoBehaviour
                 xm = Math.Abs(_gazeX) > InteractionThreshold;
                 ym = Math.Abs(_gazeY) > InteractionThreshold;
 
-                _selectedObject.transform.Rotate(Vector3.right, xm ? _gazeX : 0);
-                _selectedObject.transform.Rotate(Vector3.up, ym ? _gazeY : 0);
+                _selectedObject.transform.Rotate(Vector3.up, xm ? _gazeX * rotationCoefficient : 0);
+                _selectedObject.transform.Rotate(Vector3.right, ym ? _gazeY * rotationCoefficient : 0);
 
                 break;
             case State.ObjectRescaling:

@@ -88,4 +88,12 @@ class Raycast : MonoBehaviour
     {
         return _currentSelectedObject;
     }
+
+    public void ResetSelectedObject()
+    {
+        _currentGazingObject.GetComponent<Outline>().enabled = false;
+        _currentSelectedObject.GetComponent<Outline>().enabled = false;
+        _currentGazingObject = null;
+        _currentSelectedObject = null;
+    }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 class ConfirmCircle : MonoBehaviour
 {
@@ -9,8 +8,7 @@ class ConfirmCircle : MonoBehaviour
     private float _progress;
     private int _round;
     private bool _activated;
-    
-    private const double Tolerance = 0.0001;
+    private bool _confirmed;
     private const float OriginScale = 0.2f;
 
     private void Awake()
@@ -20,22 +18,23 @@ class ConfirmCircle : MonoBehaviour
         _progress = 0;
         _round = 0;
         _activated = false;
+        _confirmed = false;
     }
 
     private void Update()
     {
         if (!_activated) return;
         
-        _progress += ++_round * 0.01f;
+        _progress += ++_round * 0.00006f;
         loadingCircle.transform.localScale = new Vector3(OriginScale * _progress, OriginScale * _progress, loadingCircle.transform.localScale.z);
+
+        if (OriginScale * _progress >= OriginScale) 
+            _confirmed = true;
     }
 
     public bool Confirmed()
     {
-        if (!(Math.Abs(_progress - 1) < Tolerance)) return false;
-        
-        Deactivate();
-        return true;
+        return _confirmed;
     }
 
     public void Activate()
@@ -54,5 +53,6 @@ class ConfirmCircle : MonoBehaviour
         _progress = 0;
         _round = 0;
         _activated = false;
+        _confirmed = false;
     }
 }

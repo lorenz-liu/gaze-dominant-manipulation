@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 class OperationSelector : MonoBehaviour
 {
     public SystemStateMachine systemStateMachine;
+    public Raycast raycast;
     public GameObject rotation;
     public GameObject translation;
     public GameObject rescaling;
@@ -12,12 +13,12 @@ class OperationSelector : MonoBehaviour
     public GazeTracker gazeTracker;
     [FormerlySerializedAs("confirmCircle1")] public ConfirmCircle confirmCircle;
 
-    private const float InteractionThreshold = 0.5f;
+    private const float InteractionThreshold = 0.3f;
     private int _selectingMode;
     
     private void Start()
     {
-        MakeVisible(true);
+        MakeVisible(false);
     }
 
     private void Update()
@@ -55,9 +56,10 @@ class OperationSelector : MonoBehaviour
                 _selectingMode = 1;
                 confirmCircle.Activate();
             }
-            if (confirmCircle.Confirmed())
-                systemStateMachine.TransitStateTo(State.ObjectTranslating);
-        } else if (Math.Abs(x) < InteractionThreshold && Math.Abs(y) >= InteractionThreshold)
+            if (!confirmCircle.Confirmed()) return;
+            confirmCircle.Deactivate();
+            systemStateMachine.TransitStateTo(State.ObjectRotating);
+        } else if (Math.Abs(x) < InteractionThreshold && y >= InteractionThreshold)
         {
             if (_selectingMode != 2)
             {
@@ -65,8 +67,9 @@ class OperationSelector : MonoBehaviour
                 _selectingMode = 2;
                 confirmCircle.Activate();
             }
-            if (confirmCircle.Confirmed())
-                systemStateMachine.TransitStateTo(State.ObjectRotating);
+            if (!confirmCircle.Confirmed()) return;
+            confirmCircle.Deactivate();
+            systemStateMachine.TransitStateTo(State.ObjectTranslating);
         } else if (x >= InteractionThreshold && Math.Abs(y) < InteractionThreshold)
         {
             if (_selectingMode != 3)
@@ -75,9 +78,10 @@ class OperationSelector : MonoBehaviour
                 _selectingMode = 3;
                 confirmCircle.Activate();
             }
-            if (confirmCircle.Confirmed())
-                systemStateMachine.TransitStateTo(State.ObjectRescaling);
-        } else if (Math.Abs(x) < InteractionThreshold && Math.Abs(y) <= -InteractionThreshold)
+            if (!confirmCircle.Confirmed()) return;
+            confirmCircle.Deactivate();
+            systemStateMachine.TransitStateTo(State.ObjectRescaling);
+        } else if (Math.Abs(x) < InteractionThreshold && y <= -InteractionThreshold)
         {
             if (_selectingMode != 4)
             {
@@ -85,8 +89,15 @@ class OperationSelector : MonoBehaviour
                 _selectingMode = 4;
                 confirmCircle.Activate();
             }
-            if (confirmCircle.Confirmed())
-                systemStateMachine.TransitStateTo(State.Idle);
+            if (!confirmCircle.Confirmed()) return;
+            confirmCircle.Deactivate();
+            raycast.ResetSelectedObject();
+            systemStateMachine.TransitStateTo(State.Idle);
+        }
+        else
+        {
+            confirmCircle.Deactivate();
+            _selectingMode = -1;
         }
     }
 }
