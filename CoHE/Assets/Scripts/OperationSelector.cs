@@ -12,7 +12,7 @@ class OperationSelector : MonoBehaviour
     public GazeTracker gazeTracker;
     public ConfirmCircle confirmCircle;
 
-    private const float InteractionThreshold = 0.2f;
+    private const float InteractionThreshold = 0.15f;
     private int _selectingMode;
     
     private void Start()

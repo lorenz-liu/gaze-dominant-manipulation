@@ -18,7 +18,7 @@ class GazeTracker : MonoBehaviour
     public bool showGazeRay;
 
     private Dictionary<XrEyeShapeHTC, float> _eyeDataMap;
-    private const float InteractionThreshold = 0.1f;
+    private const float InteractionThreshold = 0.15f;
     private bool _specInit;
     private State _lastState;
     private Quaternion _initSpec;
