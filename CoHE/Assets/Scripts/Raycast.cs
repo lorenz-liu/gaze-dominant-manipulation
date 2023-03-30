@@ -28,7 +28,8 @@ class Raycast : MonoBehaviour
             case State.Idle:
                 if (_currentGazingObject != null && _currentGazingObject != _currentSelectedObject)
                 {
-                    _currentGazingObject.GetComponent<Outline>().enabled = false;
+                    if (_currentGazingObject.GetComponent<Outline>() != null)
+                        _currentGazingObject.GetComponent<Outline>().enabled = false;
                     _currentGazingObject = null;
                 }
         
