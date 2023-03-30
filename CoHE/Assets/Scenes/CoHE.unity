@@ -1925,9 +1925,9 @@ MonoBehaviour:
   gazeRay: {fileID: 1280846852}
   gazeRayOrigin: {fileID: 345682638}
   eyeTracker: {fileID: 602519478}
-  rotationCoefficient: 1
-  translationCoefficient: 2
-  rescalingCoefficient: 0.5
+  rotationCoefficient: 5
+  translationCoefficient: 1
+  rescalingCoefficient: 1
   showGazeRay: 1
 --- !u!4 &890935098
 Transform:
