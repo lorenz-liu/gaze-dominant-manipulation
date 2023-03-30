@@ -38,6 +38,10 @@ class Raycast : MonoBehaviour
                 {
                     _lineRenderer.SetPosition(1, hit.point);
                     _currentGazingObject = hit.transform.gameObject;
+                    
+                    if (_currentGazingObject.GetComponent<NotInteractable>() != null)
+                        break;
+                    
                     if (_currentGazingObject.GetComponent<Outline>() != null)
                     {
                         _currentGazingObject.GetComponent<Outline>().enabled = true;
