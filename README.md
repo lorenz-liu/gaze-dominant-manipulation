@@ -1,5 +1,7 @@
 # BUAA-Graduation-Project
-Design and Implementation of a Head-eye Collaborative Object Manipulation Method in Virtual Reality. 
+**混合现实头眼协同对象操纵方法设计与实现**
+
+Design and Implementation of a Head-eye Collaborative Object Manipulation Method in MixedReality. 
 
 ## Prerequisites
 
@@ -84,6 +86,10 @@ Please install by order in case config chaos:
 
 在許多時候，這大概不會是個問題——因為重要的是凝視的持續時間和位置。複雜的是，眨眼和跳視通常是合在一起的事情，這表示眨眼會蓋掉實際的眼跳資訊。好在的是，SR Research 分析軟體 Data Viewer 提供了一系列處理眨眼的選項，包括去除或合併眨眼資訊前後的凝視行為。
 
+## Appendix
+
+论文编辑器：TexMaker
+
 ## Last Updated
 
-Feb 28, 2023
+Apr 12, 2023
