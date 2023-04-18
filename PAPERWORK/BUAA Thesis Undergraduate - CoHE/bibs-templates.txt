@@ -1,0 +1,53 @@
+@BOOK{kottwitz2011latex,
+  title={LaTeX Beginner's Guide},
+  author={Kottwitz, S.},
+  isbn={9781847199867},
+  url={http://books.google.com.hk/books?id=rB1Cb62dVnUC},
+  year={2011},
+  publisher={Packt Publishing}
+}
+%书籍
+
+@ARTICLE{idlemem,
+  author = {Mendes, Daniel & Caputo, Ariel & Giachetti, Andrea & Ferreira, Alfredo & Jorge, Joaquim},
+  title = {A Survey on 3D Virtual Object Manipulation: From the Desktop to Immersive Virtual Environments: Survey on 3D Virtual Object Manipulation},
+  journal = {Computer Graphics Forum},
+  year = {2018}
+}
+%期刊文章
+
+@INPROCEEDINGS{1992GMM,
+  author = {M. J. Frankling and M. J. Carey and M. Livny},
+  title = {Globla memory management in client-server DBMS architectures},
+  booktitle = {Proceeding of the 18th VLDB Conference},
+  year = {1992},
+  month = aug
+}
+%会议论文
+
+@TECHREPORT{sigsegv,
+  author = {E. A. Anderson and J. M. Neefe},
+  title = {An Exploration of Network RAM},
+  institution = {UC Berkley},
+  year = {1994},
+  number = {CSD-98-1000},
+  month = dec
+}
+%技术报告
+
+@MASTERSTHESIS{NFS,
+  author = {M. R. Hines and M. Lewandowski and K. Gopalan},
+  title = {Anemone: Adaptive Network Memory Engine},
+  school = {Florida State University},
+  year = {2003}
+}
+%硕士论文
+
+@OTHER{stream,
+  author = {John McCalpin},
+  etype = {CP},
+  howpublished = {http://www.streambench.org},
+  title = {Streambenchmark},
+  url = {http://www.streambench.org}
+}
+%其他
