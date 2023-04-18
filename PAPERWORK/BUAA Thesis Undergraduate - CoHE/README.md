@@ -2,11 +2,19 @@
 
 北航毕设论文 LaTeX 模板
 
-## 项目说明
+## TexMaker配置
 
-这是北航开源俱乐部维护的的北航毕设论文的 LaTeX 模板
+安装 **TexLive 2020** （务必确保是这个版本，否则可能出现排版错误）
 
-目前仍在开发中，欢迎关注进展，提交 bug/issue，甚至贡献代码
+TexMaker配置
+
+> LaTeX: `"C:/texlive/2020/bin/win32/latex.exe" -interaction=nonstopmode %.tex`
+>
+> PdfLaTeX: `"C:/texlive/2020/bin/win32/pdflatex.exe" -interaction=nonstopmode %.tex`
+
+编译器请使用 **XeLaTeX** 
+
+一般编译步骤:XeLaTeX -> BibTeX -> XeLaTeX  -> XeLaTeX 
 
 ## 预览
 
