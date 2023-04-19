@@ -526,7 +526,7 @@ The LaTeX template for thesis of BUAA]
                 \centerline{\zihao{-0}\heiti 毕业设计(论文)}
                 ~~\\
                 \vspace*{\stretch{4}}
-                \begin{minipage}[h]{.8\textwidth}
+                \begin{minipage}[h]{.6\textwidth}
                     \centering{\heiti\zihao{2}\buaa@thesistitle}
                 \end{minipage}
                 \vskip 20bp
@@ -886,8 +886,9 @@ The LaTeX template for thesis of BUAA]
         \ulinel{\buaa@bachelor@assign@ref@four}
         \ulinel{\buaa@bachelor@assign@ref@five}
         \ulinel{\buaa@bachelor@assign@ref@six}
-        \ulinec[.28]{\buaa@school}学院\ulinec[.28]{\buaa@major}~专业类~\ulinec[.15]{\buaa@class}班 \\
-        学生\ulinec[.3]{\buaa@thesisauthor} \\
+        \ulinel{\buaa@bachelor@assign@ref@seven}
+        \ulinel{\buaa@bachelor@assign@ref@eight}
+        \ulinec[.15]{\buaa@school}学院~~~\ulinec[.28]{\buaa@major}专业~~~\ulinec[.15]{\buaa@class}班~~~学生\ulinec[.15]{\buaa@thesisauthor} \\
         毕业设计(论文)时间：~~\ulinec[.1]{\buaa@thesisbeginyear}年\ulinec[.06]{\buaa@thesisbeginmonth}月\ulinec[.06]{\buaa@thesisbeginday}日至\ulinec[.1]{\buaa@thesisendyear}年\ulinec[.06]{\buaa@thesisendmonth}月\ulinec[.06]{\buaa@thesisendday}日 \\
         答辩时间：\ulinec[.16]{\buaa@defenseyear}年\ulinec[.08]{\buaa@defensemonth}月\ulinec[.08]{\buaa@defenseday}日 \\
         成\qquad 绩：\ulinec[.3]{} \\
