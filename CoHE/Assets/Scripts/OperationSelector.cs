@@ -68,7 +68,7 @@ class OperationSelector : MonoBehaviour
             }
             if (!confirmCircle.Confirmed()) return;
             confirmCircle.Deactivate();
-            systemStateMachine.TransitStateTo(State.ObjectTranslating);
+            systemStateMachine.TransitStateTo(State.ObjectRescaling);
         } else if (x >= InteractionThreshold && Math.Abs(y) < InteractionThreshold)
         {
             if (_selectingMode != 3)
@@ -79,7 +79,7 @@ class OperationSelector : MonoBehaviour
             }
             if (!confirmCircle.Confirmed()) return;
             confirmCircle.Deactivate();
-            systemStateMachine.TransitStateTo(State.ObjectRescaling);
+            systemStateMachine.TransitStateTo(State.ObjectTranslating);
         } else if (Math.Abs(x) < InteractionThreshold && y <= -InteractionThreshold)
         {
             if (_selectingMode != 4)
