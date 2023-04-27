@@ -40,7 +40,7 @@ class Raycast : MonoBehaviour
                     _lineRenderer.SetPosition(1, hit.point);
                     _currentGazingObject = hit.transform.gameObject;
                     
-                    if (_currentGazingObject.GetComponent<NotInteractable>() != null)
+                    if (_currentGazingObject.GetComponent<Interactable>() == null)
                         break;
                     
                     if (_currentGazingObject.GetComponent<Outline>() != null)
@@ -67,6 +67,12 @@ class Raycast : MonoBehaviour
                 if (_currentGazingObject != null)
                 {
                     _currentSelectedObject = _currentGazingObject;
+                    var component = _currentGazingObject.GetComponent<Rigidbody>();
+                    if (component != null)
+                    {
+                        component.useGravity = false;
+                    }
+                    
                     systemStateMachine.TransitStateTo(State.ObjectSelected);
                 }
         
@@ -96,6 +102,11 @@ class Raycast : MonoBehaviour
 
     public void ResetSelectedObject()
     {
+        var component = _currentGazingObject.GetComponent<Rigidbody>();
+        if (component != null)
+        {
+            component.useGravity = true;
+        }
         _currentGazingObject.GetComponent<Outline>().enabled = false;
         _currentSelectedObject.GetComponent<Outline>().enabled = false;
         _currentGazingObject = null;

@@ -60,3 +60,19 @@ Update Mode: mergeDefaultDependencies
 
 The following packages were added:
   com.unity.postprocessing@3.2.2
+
+=== Thu Apr 27 13:43:56 2023
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.postprocessing from version 3.0.3 to 3.2.2
+
+=== Thu Apr 27 13:44:26 2023
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.postprocessing from version 3.0.3 to 3.2.2
