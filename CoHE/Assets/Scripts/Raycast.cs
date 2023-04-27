@@ -71,6 +71,8 @@ class Raycast : MonoBehaviour
                     if (component != null)
                     {
                         component.useGravity = false;
+                        component.drag = 100.0f;
+                        component.freezeRotation = true;
                     }
                     
                     systemStateMachine.TransitStateTo(State.ObjectSelected);
@@ -106,6 +108,8 @@ class Raycast : MonoBehaviour
         if (component != null)
         {
             component.useGravity = true;
+            component.drag = 0f;
+            component.freezeRotation = false;
         }
         _currentGazingObject.GetComponent<Outline>().enabled = false;
         _currentSelectedObject.GetComponent<Outline>().enabled = false;
