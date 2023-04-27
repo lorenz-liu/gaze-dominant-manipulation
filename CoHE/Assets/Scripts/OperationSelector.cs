@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-class OperationSelector : MonoBehaviour
+internal class OperationSelector : MonoBehaviour
 {
     public SystemStateMachine systemStateMachine;
     public Raycast raycast;

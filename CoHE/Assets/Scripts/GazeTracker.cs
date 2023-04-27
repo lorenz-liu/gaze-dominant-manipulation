@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using VIVE;
 
-class GazeTracker : MonoBehaviour
+internal class GazeTracker : MonoBehaviour
 {
     private GameObject _selectedObject;
     public SystemStateMachine systemStateMachine;
@@ -12,10 +12,7 @@ class GazeTracker : MonoBehaviour
     public LineRenderer gazeRay;
     public GameObject gazeRayOrigin;
     public EyeTracker eyeTracker;
-    public float rotationCoefficient;
-    public float translationCoefficient;
-    public float rescalingCoefficient;
-    public bool showGazeRay;
+    public Configuration configuration;
 
     private Dictionary<XrEyeShapeHTC, float> _eyeDataMap;
     private const float InteractionThreshold = 0.15f;
@@ -25,12 +22,25 @@ class GazeTracker : MonoBehaviour
     private float _gazeX;
     private float _gazeY;
     
+    private float _rotationCoefficient;
+    private float _translationCoefficient;
+    private float _rescalingCoefficient;
+    private bool _showGazeRay;
+
+    private void Awake()
+    {
+        _rotationCoefficient = configuration.rotationCoefficient;
+        _translationCoefficient = configuration.translationCoefficient;
+        _rescalingCoefficient = configuration.rescalingCoefficient;
+        _showGazeRay = configuration.showGazeRay;
+    }
+
     private void Start()
     {
         _specInit = false;
         _lastState = State.Idle;
 
-        gazeRay.gameObject.SetActive(showGazeRay);
+        gazeRay.gameObject.SetActive(_showGazeRay);
     }
 
     private void Update()
@@ -70,9 +80,9 @@ class GazeTracker : MonoBehaviour
                 var zn = curSpc.z - _initSpec.z > 0 ? -1 : 1;
                 
                 _selectedObject.transform.position += new Vector3(
-                    translationCoefficient * (xm ? xn * Activate(Math.Abs(_gazeX) - InteractionThreshold) : 0), 
-                    translationCoefficient * (ym ? yn * Activate(Math.Abs(_gazeY) - InteractionThreshold) : 0), 
-                    translationCoefficient * (zm ? zn * Activate(Math.Abs(curSpc.z - _initSpec.z) - InteractionThreshold) : 0));
+                    _translationCoefficient * (xm ? xn * Activate(Math.Abs(_gazeX) - InteractionThreshold) : 0), 
+                    _translationCoefficient * (ym ? yn * Activate(Math.Abs(_gazeY) - InteractionThreshold) : 0), 
+                    _translationCoefficient * (zm ? zn * Activate(Math.Abs(curSpc.z - _initSpec.z) - InteractionThreshold) : 0));
 
                 break;
             case State.ObjectRotating:
@@ -85,8 +95,8 @@ class GazeTracker : MonoBehaviour
                 xn = _gazeX > 0 ? -1 : 1;
                 yn = _gazeY > 0 ? -1 : 1;
 
-                _selectedObject.transform.Rotate(Vector3.up, rotationCoefficient * (xm ? xn * Activate(Math.Abs(_gazeX) - InteractionThreshold) : 0));
-                _selectedObject.transform.Rotate(Vector3.right, rotationCoefficient * (ym ? yn * Activate(Math.Abs(_gazeY) - InteractionThreshold) : 0));
+                _selectedObject.transform.Rotate(Vector3.up, _rotationCoefficient * (xm ? xn * Activate(Math.Abs(_gazeX) - InteractionThreshold) : 0));
+                _selectedObject.transform.Rotate(Vector3.right, _rotationCoefficient * (ym ? yn * Activate(Math.Abs(_gazeY) - InteractionThreshold) : 0));
 
                 break;
             case State.ObjectRescaling:
@@ -105,9 +115,9 @@ class GazeTracker : MonoBehaviour
                 xn = _gazeX > 0 ? 1 : -1;
 
                 localScale += new Vector3(
-                    ix / sum * (xm ? xn * Activate(Math.Abs(_gazeX) - InteractionThreshold) : 0) * rescalingCoefficient, 
-                    iy / sum * (xm ? xn * Activate(Math.Abs(_gazeX) - InteractionThreshold) : 0) * rescalingCoefficient, 
-                    iz / sum * (xm ? xn * Activate(Math.Abs(_gazeX) - InteractionThreshold) : 0) * rescalingCoefficient);
+                    ix / sum * (xm ? xn * Activate(Math.Abs(_gazeX) - InteractionThreshold) : 0) * _rescalingCoefficient, 
+                    iy / sum * (xm ? xn * Activate(Math.Abs(_gazeX) - InteractionThreshold) : 0) * _rescalingCoefficient, 
+                    iz / sum * (xm ? xn * Activate(Math.Abs(_gazeX) - InteractionThreshold) : 0) * _rescalingCoefficient);
                 _selectedObject.transform.localScale = localScale;
 
                 break;
@@ -120,7 +130,7 @@ class GazeTracker : MonoBehaviour
         }
     }
 
-    private float Activate(float d)
+    private static float Activate(float d)
     {
         return d * d * d;
     }

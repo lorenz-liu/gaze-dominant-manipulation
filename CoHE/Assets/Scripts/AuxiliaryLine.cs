@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class AuxiliaryLine : MonoBehaviour
+internal class AuxiliaryLine : MonoBehaviour
 {
     public SystemStateMachine systemStateMachine;
     public Raycast raycast;

@@ -64,25 +64,19 @@ public class Watcher
     {
         if (_waitForAnotherWinking)
         {
-            if ((Math.Abs(eyeDataMao[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_BLINK_HTC]) < WinkingTolerance &&
-                 Math.Abs(eyeDataMao[XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_BLINK_HTC] - 1) < WinkingTolerance) || 
-                (Math.Abs(eyeDataMao[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_BLINK_HTC] - 1) < WinkingTolerance &&
-                 Math.Abs(eyeDataMao[XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_BLINK_HTC]) < WinkingTolerance))
-            {
-                _waitForAnotherWinking = false;
-                return true;
-            }
-        }
-        else
-        {
-            if (Math.Abs(eyeDataMao[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_BLINK_HTC]) < WinkingTolerance &&
-                 Math.Abs(eyeDataMao[XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_BLINK_HTC]) < WinkingTolerance)
-            {
-                _waitForAnotherWinking = true;
+            if ((!(Math.Abs(eyeDataMao[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_BLINK_HTC]) < WinkingTolerance) ||
+                 !(Math.Abs(eyeDataMao[XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_BLINK_HTC] - 1) < WinkingTolerance)) &&
+                (!(Math.Abs(eyeDataMao[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_BLINK_HTC] - 1) < WinkingTolerance) ||
+                 !(Math.Abs(eyeDataMao[XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_BLINK_HTC]) < WinkingTolerance)))
                 return false;
-            }
+            _waitForAnotherWinking = false;
+            return true;
         }
 
+        if (!(Math.Abs(eyeDataMao[XrEyeShapeHTC.XR_EYE_EXPRESSION_LEFT_BLINK_HTC]) < WinkingTolerance) ||
+            !(Math.Abs(eyeDataMao[XrEyeShapeHTC.XR_EYE_EXPRESSION_RIGHT_BLINK_HTC]) < WinkingTolerance))
+            return false;
+        _waitForAnotherWinking = true;
         return false;
     }
 }

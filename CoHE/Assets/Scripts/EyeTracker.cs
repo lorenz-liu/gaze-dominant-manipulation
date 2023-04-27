@@ -3,10 +3,9 @@ using UnityEngine;
 using VIVE.FacialTracking;
 using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using VIVE;
 
-class EyeTracker : MonoBehaviour
+internal class EyeTracker : MonoBehaviour
 {
     private readonly FacialManager _facialManager = new();
     private Dictionary<XrEyeShapeHTC, float> _eyeDataMap = new();
@@ -15,13 +14,15 @@ class EyeTracker : MonoBehaviour
     private Watcher _watcher;
     private bool _doubleBlinking;
     private bool _winking;
+    private bool _enableSelectionTest;
     
-    [Serialize] public GameObject avatar;
-    [Serialize] public bool enableSelectionTest;
-    
-    
+    public GameObject avatar;
+    public Configuration configuration;
+
     private void Awake()
     {
+        _enableSelectionTest = configuration.enableSelectionTest;
+        
         _facialManager.StartFramework(XrFacialTrackingTypeHTC.XR_FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC);
 
         var creatingPath = LOGFolder + 
@@ -58,7 +59,7 @@ class EyeTracker : MonoBehaviour
         if (_watcher.DoubleBlinkingOccurs(_eyeDataMap))
         {
             _doubleBlinking = true;
-            if (!enableSelectionTest) return;
+            if (!_enableSelectionTest) return;
             var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             var sourceCor = avatar.transform.position;
             cube.transform.localScale *= 0.1f;
@@ -74,7 +75,7 @@ class EyeTracker : MonoBehaviour
         if (_watcher.WinkingOccurs(_eyeDataMap))
         {
             _winking = true;
-            if (!enableSelectionTest) return;
+            if (!_enableSelectionTest) return;
             var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             var sourceCor = avatar.transform.position;
             cube.transform.localScale *= 0.1f;

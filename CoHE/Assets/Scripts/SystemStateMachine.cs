@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-enum State
+internal enum State
 {
     Idle, 
     ObjectSelected,
@@ -11,7 +11,7 @@ enum State
     ObjectRescaling
 }
 
-class StateMachine
+internal class StateMachine
 {
     private readonly State _current;
     private readonly ArrayList _next;
@@ -51,7 +51,7 @@ class StateMachine
     }
 }
 
-class SystemStateMachine : MonoBehaviour
+internal class SystemStateMachine : MonoBehaviour
 {
     private StateMachine _stateMachine;
     

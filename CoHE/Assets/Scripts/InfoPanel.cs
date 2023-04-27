@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-class InfoPanel : MonoBehaviour
+internal class InfoPanel : MonoBehaviour
 {
     [SerializeField] public Raycast raycast;
 
@@ -12,6 +11,6 @@ class InfoPanel : MonoBehaviour
 
     private string GenerateInfo()
     {
-        return $"{"Selection Signal: ",20}{(raycast.winking ? "Winking" : "Double Blinking"),10}";
+        return $"{"Selection Signal: ",20}{(raycast.GetWinking() ? "Winking" : "Double Blinking"),10}";
     }
 }

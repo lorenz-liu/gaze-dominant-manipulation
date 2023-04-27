@@ -9,6 +9,6 @@ public static class LogHelper
 
     public static void Failure(object info)
     {
-        Debug.LogError("Failure: " + info);
+        Debug.LogError("FAILURE: " + info);
     }
 }

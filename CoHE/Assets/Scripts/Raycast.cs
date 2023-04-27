@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-class Raycast : MonoBehaviour
+internal class Raycast : MonoBehaviour
 {
     [SerializeField]
     public Camera playerCamera;
@@ -10,11 +10,17 @@ class Raycast : MonoBehaviour
     public float renderDuration;
     public EyeTracker eyeTracker;
     public SystemStateMachine systemStateMachine;
-    public bool winking;
-
+    public Configuration configuration;
+    
+    private bool _winking;
     private LineRenderer _lineRenderer;
     private GameObject _currentGazingObject;
     private GameObject _currentSelectedObject;
+
+    private void Awake()
+    {
+        _winking = configuration.useWinkingAsConfirmation;
+    }
 
     private void Start()
     {
@@ -61,7 +67,7 @@ class Raycast : MonoBehaviour
                     _lineRenderer.SetPosition(1, rayOrigin + (playerCamera.transform.forward * range));
                 }
         
-                if (winking ? !eyeTracker.GetWinking() : !eyeTracker.GetDoubleBlinking()) return;
+                if (_winking ? !eyeTracker.GetWinking() : !eyeTracker.GetDoubleBlinking()) return;
                 LogHelper.Success("Raycast tries to select. ");
 
                 if (_currentGazingObject != null)
@@ -115,5 +121,10 @@ class Raycast : MonoBehaviour
         _currentSelectedObject.GetComponent<Outline>().enabled = false;
         _currentGazingObject = null;
         _currentSelectedObject = null;
+    }
+
+    public bool GetWinking()
+    {
+        return _winking;
     }
 }

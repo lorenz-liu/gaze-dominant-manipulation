@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class ConfirmCircle : MonoBehaviour
+internal class ConfirmCircle : MonoBehaviour
 {
     public GazeTracker gazeTracker;
     public Camera playerCamera;

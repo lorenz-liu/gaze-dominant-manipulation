@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class Interactable : MonoBehaviour
+internal class Interactable : MonoBehaviour
 {
     
 }
