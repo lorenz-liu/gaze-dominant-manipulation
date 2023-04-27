@@ -82,7 +82,7 @@ internal class GazeTracker : MonoBehaviour
                 _selectedObject.transform.position += new Vector3(
                     _translationCoefficient * (xm ? xn * Activate(Math.Abs(_gazeX) - InteractionThreshold) : 0), 
                     _translationCoefficient * (ym ? yn * Activate(Math.Abs(_gazeY) - InteractionThreshold) : 0), 
-                    _translationCoefficient * (zm ? zn * Activate(Math.Abs(curSpc.z - _initSpec.z) - InteractionThreshold) : 0));
+                    _translationCoefficient * (zm ? 5 * zn * Activate(Math.Abs(curSpc.z - _initSpec.z) - InteractionThreshold) : 0));
 
                 break;
             case State.ObjectRotating:

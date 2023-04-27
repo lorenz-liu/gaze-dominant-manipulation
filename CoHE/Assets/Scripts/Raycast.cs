@@ -9,6 +9,7 @@ internal class Raycast : MonoBehaviour
     public float range;
     public float renderDuration;
     public EyeTracker eyeTracker;
+    public InfoPanel infoPanel;
     public SystemStateMachine systemStateMachine;
     public Configuration configuration;
     
@@ -73,11 +74,17 @@ internal class Raycast : MonoBehaviour
                 if (_currentGazingObject != null)
                 {
                     _currentSelectedObject = _currentGazingObject;
+
+                    if (!infoPanel.GetStarted())
+                    {
+                        infoPanel.SetStart();    
+                    }
+                    
                     var component = _currentGazingObject.GetComponent<Rigidbody>();
                     if (component != null)
                     {
                         component.useGravity = false;
-                        component.drag = 100.0f;
+                        component.drag = Mathf.Infinity;
                         component.freezeRotation = true;
                     }
                     
