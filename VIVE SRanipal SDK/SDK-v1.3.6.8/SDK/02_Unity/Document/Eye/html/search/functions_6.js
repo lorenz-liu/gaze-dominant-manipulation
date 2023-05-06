@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['trygaze',['TryGaze',['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye.html#a2f556ec16919b43325ba0dfa991c6e22',1,'ViveSR.anipal.Eye.SRanipal_Eye.TryGaze(SingleEyeDataValidity validity, out GazeIndex gazeIndex, EyeData eye_data)'],['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye.html#a4a3de44e33d2ed7e30208bc673705f19',1,'ViveSR.anipal.Eye.SRanipal_Eye.TryGaze(SingleEyeDataValidity validity, out GazeIndex gazeIndex)'],['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye__v2.html#adfa02cf516c4e0d7cccd911cb55a780a',1,'ViveSR.anipal.Eye.SRanipal_Eye_v2.TryGaze(SingleEyeDataValidity validity, out GazeIndex gazeIndex, EyeData_v2 eye_data)'],['../class_vive_s_r_1_1anipal_1_1_eye_1_1_s_ranipal___eye__v2.html#a606ecf4bfb963d156b6a45f1d78a2e90',1,'ViveSR.anipal.Eye.SRanipal_Eye_v2.TryGaze(SingleEyeDataValidity validity, out GazeIndex gazeIndex)']]]
-];

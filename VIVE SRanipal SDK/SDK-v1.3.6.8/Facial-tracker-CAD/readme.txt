@@ -1,1 +1,0 @@
-*VIVE only guarantees compatibility of VIVE Facial Tracker with VIVE Pro and VIVE Pro Eye headsets.*
