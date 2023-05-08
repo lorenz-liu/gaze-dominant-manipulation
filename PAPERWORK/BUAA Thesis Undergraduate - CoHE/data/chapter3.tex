@@ -9,7 +9,7 @@
 \begin{figure}[b!]
     \centering
     \includegraphics[width=.85\textwidth]{figure/system_state_machine.png}
-    \caption{交互系统状态机}
+    \caption{交互系统有限状态机}
     \label{fig-3-1}
 \end{figure}
 
@@ -51,7 +51,7 @@
 
 \subsection{菜单说明}
 
-“四叶草”模式选择菜单在且仅在系统状态机的OBJECT\us SELECTED状态下生成在用户界面上，用户可以通过它来选择进入到某具体的交互模式：空间位移、空间旋转和空间等比例缩放，分别对应系统有限状态机中的OBJECT\us MOVING、OBJECT\us ROTATING和OBJECT\us RESCALING三个状态；用户也可以通过它来取消选中物体以回到IDLE态。这个过程可以在我们规定的系统有限状态机中体现\ref{fig-3-1}。
+“四叶草”模式选择菜单在且仅在系统有限状态机的OBJECT\us SELECTED状态下生成在用户界面上，用户可以通过它来选择进入到某具体的交互模式：空间位移、空间旋转和空间等比例缩放，分别对应系统有限状态机中的OBJECT\us MOVING、OBJECT\us ROTATING和OBJECT\us RESCALING三个状态；用户也可以通过它来取消选中物体以回到IDLE态。这个过程可以在我们规定的系统有限状态机中体现\ref{fig-3-1}。
 
 菜单在四个方向提供了四个的选项，分别为位移、旋转、缩放和取消；用户可以通过看向相应的方向来选择对应的选项。在规定每个方位具体对应哪个选项时，我们首先设置了一个问卷调查，发放给30个随机人员采样以获取用户根据推测对四个选项使用频率的排序；其次，我们参考Maxwell等人在2006年发表的结论（眼球水平运动的负担比垂直运动的负担小\upcite{2006Maxwell}），将问卷调查中显示最频繁使用的两种交互模式选项（位移、旋转）设置在左右两侧，将剩下的两种选项（等比缩放、取消）设置在上下两侧。
 
@@ -60,7 +60,120 @@
 
 \section{对象操纵}\label{Manipulation}
 
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=.7\textwidth]{figure/augmented.png}
+    \caption{信号增强函数}
+    \label{fig-3-2}
+\end{figure}
 
+我们的交互系统支持完全6DOF的对象操纵，允许用户对目标对象进行空间位移、空间旋转、等比例缩放三种具体的操纵，分别对应系统有限状态机中的OBJECT\us TRANSLATING、OBJECT\us ROTATING和OBJECT\us RESCALING。
+
+在每种对象操纵模式下，我们引入了一种特殊的信号增强函数：
+
+\begin{equation}
+	\label{formula-3-1}
+	A(v) = 5v^{5}, -1 \le v \le 1
+\end{equation}
+
+让用户在小幅度动作时可以对对象进行微调，在大幅度动作时可以让对象作快速动作；其增强效果见图\ref{fig-3-2}。
+
+为了减小操作负担和学习难度，我们都尽可能采用眼动进行主导的操纵，并且尽量不引入更多的操纵模态。为了便于接下来对具体操纵方法的阐释，我们在对象操纵空间中设置了一个三维直角坐标系，见图\ref{fig-3-3}。
+
+\subsection{空间位移}
+
+在空间位移时，对于X-Y平面的移动，对象跟随眼动向前射线在X-Y平面的投影距离作出相应的动作；假设眼动向前射线在X-Y平面的投影坐标为 $(x, y)$ ，对象在X轴向和Y轴向的移动为：
+
+\begin{equation}
+	\label{formula-3-2}
+	\delta_x = 
+    \left\{
+    \begin{array}{l}
+        0, \quad {\mbox{\boldmath $if$}}\ \left|x\right| < T \\ [0.2cm]
+        x \cdot C,\quad {\mbox{\boldmath $default$}}
+    \end{array}
+    \right.
+\end{equation}
+
+\begin{equation}
+	\label{formula-3-3}
+	\delta_y = 
+    \left\{
+    \begin{array}{l}
+        0, \quad {\mbox{\boldmath $if$}}\ \left|y\right| < T \\ [0.2cm]
+        y \cdot C,\quad {\mbox{\boldmath $default$}}
+    \end{array}
+    \right.
+\end{equation}
+
+其中 $T$ 和 $C$ 分别是预先规定的阈值和比例系数。对于Z轴方向的移动，对象跟随头部以Z轴为旋转轴的角度-距离映射作出相应的动作；假设头动绕Z轴的旋转角度为 $\omega$ ，对象在Z轴方向的移动为：
+
+\begin{equation}
+	\label{formula-3-4}
+	\delta_z = 
+    \left\{
+    \begin{array}{l}
+        0, \quad {\mbox{\boldmath $if$}}\ \left|\omega\right| < T \\ [0.2cm]
+        \sin{\omega} \cdot C,\quad {\mbox{\boldmath $default$}}
+    \end{array}
+    \right.
+\end{equation}
+
+其中 $T$ 和 $C$ 分别是预先规定的阈值和比例系数。
+
+\subsection{空间定轴旋转}
+
+在空间旋转时，对于以X轴的旋转，对象跟随眼动向前射线在Y轴的投影距离-角度映射作出相应的动作；对于以Y轴的旋转，对象跟随眼动向前射线在X轴的投影距离-角度映射作出相应的动作；假设眼动向前射线在X-Y平面的投影坐标为 $(x, y)$ ，对象在绕X轴向和Y轴向的旋转为：
+
+\begin{equation}
+	\label{formula-3-5}
+	\delta_y = 
+    \left\{
+    \begin{array}{l}
+        0, \quad {\mbox{\boldmath $if$}}\ \left|y\right| < T \\ [0.2cm]
+        \frac{180}{\pi} \cdot x \cdot C,\quad {\mbox{\boldmath $default$}}
+    \end{array}
+    \right.
+\end{equation}
+ 
+\begin{equation}
+	\label{formula-3-6}
+	\delta_y = 
+    \left\{
+    \begin{array}{l}
+        0, \quad {\mbox{\boldmath $if$}}\ \left|y\right| < T \\ [0.2cm]
+        \frac{180}{\pi} \cdot y \cdot C,\quad {\mbox{\boldmath $default$}}
+    \end{array}
+    \right.
+\end{equation}
+
+其中 $T$ 和 $C$ 分别是预先规定的阈值和比例系数。
+
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=.35\textwidth]{figure/coordinate.png}
+    \caption{操纵空间坐标系}
+    \label{fig-3-3}
+\end{figure}
+
+\subsection{空间等比例缩放}
+
+在空间缩放时，对象跟随眼动向前射线在X轴的投影距离-缩放系数映射作出相应的动作；假设眼动向前射线在X轴的投影坐标为 $(x, 0)$ ，对象的缩放系数 $K$ 被计算为：
+
+\begin{equation}
+	\label{formula-3-7}
+	K = 
+    \left\{
+    \begin{array}{l}
+        0, \quad {\mbox{\boldmath $if$}}\ \left|y\right| < T\ {\mbox{\boldmath $or$}}\ x \le -1 \\ [0.3cm]
+        2, \quad {\mbox{\boldmath $if$}}\ \frac{x}{C} \ge 1 \\ [0.2cm]
+        1 + \frac{x}{C},\quad {\mbox{\boldmath $default$}}
+    \end{array}
+    \right.
+\end{equation}
+
+其中 $T$ 和 $C$ 分别是预先规定的阈值和比例系数；
+对象的具体表现为 $Scale^\prime = Scale \cdot K$ 。
 
 \section{信号处理}
 
@@ -119,7 +232,7 @@
 平滑交互处理的核心思想即优化对凝视驻留点的计算方式。我们规定在 $t_0$ 时刻的眼动操纵注视停留 $OE$ 被计算为在时间段 $n$ 内的眼动向前射线和头动向前射线的配合角度偏移：
 
 \begin{equation}
-	\label{formula-3-1}
+	\label{formula-3-5}
 	OE_{t_0} = \frac{1}{n} \sum_{t=t_0-n}^{t_0} \left| \hat{eye_t} \cdot \hat{head_t} - \hat{eye_{t-1}} \cdot \hat{head_{t-1}} \right|
 \end{equation}
 
