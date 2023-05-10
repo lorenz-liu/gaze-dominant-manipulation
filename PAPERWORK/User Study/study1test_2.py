@@ -3,9 +3,9 @@ from scipy.stats import shapiro
 import pandas as pd
 import statsmodels.stats.multicomp as mc
 
-data1 = [0.32, 0.25]
-data2 = [0.21, 0.52, 0.36, 0.47]
-data3 = [0.28, 0.29]
+data1 = [0.32]
+data2 = [0.21, 0.52]
+data3 = [0.28]
 
 f_val, p_val = stats.f_oneway(data1, data2, data3)
 
