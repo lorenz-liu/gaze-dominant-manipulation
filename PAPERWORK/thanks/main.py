@@ -1,35 +1,3 @@
-% !Mode:: "TeX:UTF-8"
-\chapter*{致谢}
-\addcontentsline{toc}{chapter}{致谢}
-
-%New colors defined below
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-
-%Code listing style named "mystyle"
-\lstdefinestyle{mystyle}{
-  commentstyle=\color{codegreen},
-  keywordstyle=\color{magenta},
-  numberstyle=\tiny\color{codegray},
-  stringstyle=\color{codepurple},
-  basicstyle=\ttfamily\footnotesize,
-  breakatwhitespace=false,         
-  breaklines=true,                 
-  captionpos=b,                    
-  keepspaces=true,                 
-  numbers=left,                    
-  numbersep=5pt,                  
-  showspaces=false,                
-  showstringspaces=false,
-  showtabs=false,                  
-  tabsize=2
-}
-
-%"mystyle" code listing set
-\lstset{style=mystyle}
-\begin{lstlisting}[language=Python, frame=none]
 from time import sleep
 
 
@@ -67,17 +35,17 @@ def thanks_teachers():
         print(
             '感谢王老师在我的漫漫求索中为我提供的莫大帮助和对我的研究能力的培育。'
             '在虚拟现实实验室的日子可以算是我本科最有意义的日子，'
-            '因为我在这里确定了自己的兴趣方向。' 
+            '因为我在这里确定了自己的兴趣方向。'
             if t == '王莉莉教授' else
             '感谢Prof. Yang在几乎素不相识的情况下信任并接纳我进入他的人机交互实验室，'
             '并且总是像关切自己的学生一样询问我的近况和难处。'
-            '这段经历使我充分坚定了出国深造的决心。' 
+            '这段经历使我充分坚定了出国深造的决心。'
             if t == 'Prof. Xing-Dong Yang' else
             '感谢李老师在我的本科期间带领我发表了第一篇国际学术论文，'
-            '让我体会到学术研究能够带给我的无限乐趣和成就感。' 
+            '让我体会到学术研究能够带给我的无限乐趣和成就感。'
             if t == '李俊教授' else
             '感谢徐老师在我大一时慷慨地为我提供有关计算机视觉和图形学的教导；'
-            '徐老师潜移默化教授给我的方法与理念影响了我整个本科的学习思路和历程。\n' 
+            '徐老师潜移默化教授给我的方法与理念影响了我整个本科的学习思路和历程。\n'
             if t == '徐枫教授' else '')
 
 
@@ -92,9 +60,9 @@ def thanks_seniors():
     for i, t in senior_dict.items():
         print("我想对{0}的{1}致谢。".format(i, t), end='')
         print(
-            '感谢小龙师兄在科研中对我的各种问题不厌其烦的解答。' 
+            '感谢小龙师兄在科研中对我的各种问题不厌其烦的解答。'
             if t == '刘小龙博士' else
-            '感谢哲尔师兄在暑期研究中带领我有条不紊地攻破一个个难点。\n' 
+            '感谢哲尔师兄在暑期研究中带领我有条不紊地攻破一个个难点。\n'
             if t == '徐哲尔博士' else '')
 
 
@@ -128,6 +96,3 @@ if __name__ == '__main__':
     thanks_opportunities()
     sleep(5)
     thanks_me()
-    
-\end{lstlisting}
-\cleardoublepage

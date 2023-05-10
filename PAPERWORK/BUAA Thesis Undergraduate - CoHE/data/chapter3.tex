@@ -15,9 +15,9 @@
 
 {\bf 场景浏览与目标选择}:对应状态IDLE。在进行目标选择时，用户先以通过头部向前射线指向目标操纵对象，之后以快速两次眨眼作为确认信号选择该对象，该选择和确认方法的优势由Yuan Yuan Qian团队在2017年作过探讨\upcite{yuanyuan2017}。接收到选择确认信号后，进入下一状态；
 
-{\bf 操纵模式选择}:对应状态OBJECT\us SELECTED。生成一个“四叶草”模式选择菜单，用户可以通过凝视某一选项以进入对应的操纵模式，用户也可以通过凝视“返回”选项以退回到1（详见\autoref{Clover}）；
+{\bf 操纵模式选择}:对应状态OBJECT\us SELECTED。生成一个“四叶草”模式选择菜单，用户可以通过凝视某一选项以进入对应的操纵模式，用户也可以通过凝视“返回”选项以退回到1（详见章节\ref{Clover}）；
 
-{\bf 对象操纵}：对应状态OBJECT\us MOVING、OBJECT\us ROTATING或OBJECT\us RESCALING。我们提出的操纵系统支持六自由度（6DOF）操纵。在不同的对象操纵模式下，用户可以对物体进行三自由度位移、二自由度旋转和一自由度缩放（详见\autoref{Manipulation}）；
+{\bf 对象操纵}：对应状态OBJECT\us MOVING、OBJECT\us ROTATING或OBJECT\us RESCALING。我们提出的操纵系统支持六自由度（6DOF）操纵。在不同的对象操纵模式下，用户可以对物体进行三自由度位移、二自由度旋转和一自由度缩放（详见章节\ref{Manipulation}）；
 
 {\bf 确认操纵结果}：对应状态转移条件“操纵确认信号”。通过快速两次眨眼作为确认信号以确认当前操纵状态，回到OBJECT\us SELECETD。
 
@@ -41,7 +41,8 @@
 
 在选择确认后，系统的状态转移到OBJECT\us SELECTED，并且会提供给用户一个基于听觉的声音反馈信号。这个反馈信号相对于视觉是异模态的，目的是提高交互系统的可靠性以及降低用户的迷惑感。
 
-\section{“四叶草”模式选择菜单}\label{Clover}
+\section{“四叶草”模式选择菜单}
+\label{Clover}
 
 \subsection{设计理念}
 
@@ -71,7 +72,8 @@
 
 为了避免误触和“点石成金”的人机交互领域经典问题\upcite{2016Jacob}，我们规定了一个选择确认时间；该时间默认为1秒，用户也可以根据自己的习惯调整时长。当用户选择时，界面上会显示一个选择确认进度盘（见图\ref{fig-3-4}），此时开始选择确认倒计时；进度盘会随着用户凝视射线持续指向选项而逐渐变满，用户可以在进度盘进度未满之前通过使视线复位来取消选择。当选择确认倒计时结束时，进度盘进度满，用户立即转移至凝视射线指向选项的对应状态。
 
-\section{对象操纵}\label{Manipulation}
+\section{对象操纵}
+\label{Manipulation}
 
 我们的交互系统支持完全6DOF的对象操纵，允许用户对目标对象进行空间位移、空间旋转、等比例缩放三种具体的操纵，分别对应系统有限状态机中的OBJECT\us TRANSLATING、OBJECT\us ROTATING和OBJECT\us RESCALING。
 
