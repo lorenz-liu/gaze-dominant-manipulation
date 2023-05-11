@@ -189,10 +189,15 @@
 
 \begin{algorithm}[t!]
     \caption{针对该交互系统的眼动信号滤波算法}
-	\begin{algorithmic}[1]
+    \vspace{2mm}
+    \textbf{Input} \\ dataBuffer：一个储存至多前五帧眼动信号数据的列表。 \\
+    \textbf{Output} \\ signal：当前帧接收的眼动数据。
+    \vspace{2mm}
+    
+	\begin{algorithmic}[1]	
+		
         \State SAMPLE $\leftarrow$ 5
- 
-        \State dataBuffer $\leftarrow$ EMPTY LIST of NUMBER
+        
         \State currentBufferSize $\leftarrow$ dataBuffer.Count()
 
         \If {currentBufferSize $<$ SAMPLE}
@@ -215,14 +220,15 @@
         \EndFor
 
         \State dataBuffer.RemoveFirst(max)
-        \State dataBuffer.RemoveFirst(min)  
+        \State dataBuffer.RemoveFirst(min)
 
         \
         \State sum $\leftarrow$ 0
         \For {value \textbf{in} dataBuffer}
             \State sum $\leftarrow$ sum + value
         \EndFor
-        \State \Return sum $/$ (SAMPLE -2 )
+        \State signal $\leftarrow$ sum $/$ (SAMPLE - 2)
+        \State \Return signal
 	\end{algorithmic} 
 	\label{algorithm-3-1}
 \end{algorithm} 
