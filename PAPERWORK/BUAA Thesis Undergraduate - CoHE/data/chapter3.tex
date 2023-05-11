@@ -63,17 +63,17 @@
 
 菜单在四个方向提供了四个的选项，分别为位移、旋转、缩放和取消；用户可以通过看向相应的方向来选择对应的选项。在规定每个方位具体对应哪个选项时，我们首先设置了一个问卷调查，发放给30个随机人员采样以获取用户根据推测对四个选项使用频率的排序；其次，我们参考Maxwell等人在2006年发表的结论（眼球水平运动的负担比垂直运动的负担小\upcite{2006Maxwell}），将问卷调查中显示最频繁使用的两种交互模式选项（位移、旋转）设置在左右两侧，将剩下的两种选项（等比缩放、取消）设置在上下两侧。
 
-\begin{figure}[b!]
+为了避免误触和“点石成金”的人机交互领域经典问题\upcite{2016Jacob}，我们规定了一个选择确认时间；该时间默认为1秒，用户也可以根据自己的习惯调整时长。当用户选择时，界面上会显示一个选择确认进度盘（见图\ref{fig-3-4}），此时开始选择确认倒计时；进度盘会随着用户凝视射线持续指向选项而逐渐变满，用户可以在进度盘进度未满之前通过使视线复位来取消选择。当选择确认倒计时结束时，进度盘进度满，用户立即转移至凝视射线指向选项的对应状态。
+
+\section{对象操纵}
+\label{Manipulation}
+
+\begin{figure}[t!]
     \centering
     \includegraphics[width=.7\textwidth]{figure/augmented.png}
     \caption{信号增强函数}
     \label{fig-3-2}
 \end{figure}
-
-为了避免误触和“点石成金”的人机交互领域经典问题\upcite{2016Jacob}，我们规定了一个选择确认时间；该时间默认为1秒，用户也可以根据自己的习惯调整时长。当用户选择时，界面上会显示一个选择确认进度盘（见图\ref{fig-3-4}），此时开始选择确认倒计时；进度盘会随着用户凝视射线持续指向选项而逐渐变满，用户可以在进度盘进度未满之前通过使视线复位来取消选择。当选择确认倒计时结束时，进度盘进度满，用户立即转移至凝视射线指向选项的对应状态。
-
-\section{对象操纵}
-\label{Manipulation}
 
 我们的交互系统支持完全6DOF的对象操纵，允许用户对目标对象进行空间位移、空间旋转、等比例缩放三种具体的操纵，分别对应系统有限状态机中的OBJECT\us TRANSLATING、OBJECT\us ROTATING和OBJECT\us RESCALING。
 
@@ -85,14 +85,6 @@
 \end{equation}
 
 让用户在小幅度动作时可以对对象进行微调，在大幅度动作时可以让对象作快速动作；其增强效果见图\ref{fig-3-2}。
-
-
-\begin{figure}[t!]
-    \centering
-    \includegraphics[width=.4\textwidth]{figure/coordinate.png}
-    \caption{操纵空间坐标系}
-    \label{fig-3-3}
-\end{figure}
 
 为了减小操作负担和学习难度，我们都尽可能采用眼动进行主导的操纵，并且尽量不引入更多的操纵模态。为了便于接下来对具体操纵方法的阐释，我们在对象操纵空间中设置了一个三维直角坐标系，见图\ref{fig-3-3}。
 
@@ -136,6 +128,13 @@
 \end{equation}
 
 其中 $T$ 和 $C$ 分别是预先规定的阈值和比例系数。
+
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=.4\textwidth]{figure/coordinate.png}
+    \caption{操纵空间坐标系}
+    \label{fig-3-3}
+\end{figure}
 
 \subsection{空间定轴旋转}
 
