@@ -77,7 +77,7 @@
 
 我们的交互系统支持完全6DOF的对象操纵，允许用户对目标对象进行空间位移、空间旋转、等比例缩放三种具体的操纵，分别对应系统有限状态机中的OBJECT\us TRANSLATING、OBJECT\us ROTATING和OBJECT\us RESCALING。
 
-在每种对象操纵模式下，我们引入了一种特殊的信号增强函数：
+在每种对象操纵模式下，我们尽量采取线性映射的策略，并且引入一种特殊的信号增强函数：
 
 \begin{equation}
 	\label{formula-3-1}
@@ -130,7 +130,7 @@
     \left\{
     \begin{array}{l}
         0, \quad {\mbox{\boldmath $if$}}\ \left|\omega\right| < T \\ [0.2cm]
-        \sin{\omega} \cdot C,\quad {\mbox{\boldmath $default$}}
+        \frac{\pi}{180} \cdot \omega \cdot C,\quad {\mbox{\boldmath $default$}}
     \end{array}
     \right.
 \end{equation}
