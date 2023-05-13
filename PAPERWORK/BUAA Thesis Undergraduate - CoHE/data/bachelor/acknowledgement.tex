@@ -59,8 +59,12 @@ def thanks_soulmate():
 def thanks_teachers():
     print('致老师：')
 
-    teachers = ['王莉莉教授', 'Prof. Xing-Dong Yang', '李俊教授', '徐枫教授']
-    institutions = ['北京航空航天大学', 'Simon Fraser University', '北京师范大学', '清华大学']
+    teachers = ['王莉莉教授', 'Prof. Xing-Dong Yang', '李俊教授', 'Prof. Jian Zhao', '徐枫教授']
+    institutions = ['北京航空航天大学', 
+                    'Simon Fraser University', 
+                    '北京师范大学', 
+                    'University of Waterloo', 
+                    '清华大学']
 
     teacher_dict = {i: t for i, t in zip(institutions, teachers)}
 
@@ -78,6 +82,8 @@ def thanks_teachers():
             '感谢李老师在我的本科期间带领我发表了第一篇国际学术论文，'
             '让我体会到学术研究能够带给我的无限乐趣和成就感。' 
             if t == '李俊教授' else
+            '感谢Prof. Zhao对我学术能力的认可，为我提供宝贵的研究生学习机会。'
+            if t == 'Prof. Jian Zhao' else
             '感谢徐老师在我大一时慷慨地为我提供有关计算机视觉和图形学的教导；'
             '徐老师潜移默化教授给我的方法与理念影响了我整个本科的学习思路和历程。\n' 
             if t == '徐枫教授' else '')

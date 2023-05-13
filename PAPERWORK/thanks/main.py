@@ -25,8 +25,12 @@ def thanks_soulmate():
 def thanks_teachers():
     print('致老师：')
 
-    teachers = ['王莉莉教授', 'Prof. Xing-Dong Yang', '李俊教授', '徐枫教授']
-    institutions = ['北京航空航天大学', 'Simon Fraser University', '北京师范大学', '清华大学']
+    teachers = ['王莉莉教授', 'Prof. Xing-Dong Yang', '李俊教授', 'Prof. Jian Zhao', '徐枫教授']
+    institutions = ['北京航空航天大学', 
+                    'Simon Fraser University', 
+                    '北京师范大学', 
+                    'University of Waterloo', 
+                    '清华大学']
 
     teacher_dict = {i: t for i, t in zip(institutions, teachers)}
 
@@ -35,17 +39,19 @@ def thanks_teachers():
         print(
             '感谢王老师在我的漫漫求索中为我提供的莫大帮助和对我的研究能力的培育。'
             '在虚拟现实实验室的日子可以算是我本科最有意义的日子，'
-            '因为我在这里确定了自己的兴趣方向。'
+            '因为我在这里确定了自己的兴趣方向。' 
             if t == '王莉莉教授' else
             '感谢Prof. Yang在几乎素不相识的情况下信任并接纳我进入他的人机交互实验室，'
             '并且总是像关切自己的学生一样询问我的近况和难处。'
-            '这段经历使我充分坚定了出国深造的决心。'
+            '这段经历使我充分坚定了出国深造的决心。' 
             if t == 'Prof. Xing-Dong Yang' else
             '感谢李老师在我的本科期间带领我发表了第一篇国际学术论文，'
-            '让我体会到学术研究能够带给我的无限乐趣和成就感。'
+            '让我体会到学术研究能够带给我的无限乐趣和成就感。' 
             if t == '李俊教授' else
+            '感谢Prof. Zhao对我学术能力的认可，为我提供宝贵的研究生学习机会。'
+            if t == 'Prof. Jian Zhao' else
             '感谢徐老师在我大一时慷慨地为我提供有关计算机视觉和图形学的教导；'
-            '徐老师潜移默化教授给我的方法与理念影响了我整个本科的学习思路和历程。\n'
+            '徐老师潜移默化教授给我的方法与理念影响了我整个本科的学习思路和历程。\n' 
             if t == '徐枫教授' else '')
 
 
@@ -60,9 +66,9 @@ def thanks_seniors():
     for i, t in senior_dict.items():
         print("我想对{0}的{1}致谢。".format(i, t), end='')
         print(
-            '感谢小龙师兄在科研中对我的各种问题不厌其烦的解答。'
+            '感谢小龙师兄在科研中对我的各种问题不厌其烦的解答。' 
             if t == '刘小龙博士' else
-            '感谢哲尔师兄在暑期研究中带领我有条不紊地攻破一个个难点。\n'
+            '感谢哲尔师兄在暑期研究中带领我有条不紊地攻破一个个难点。\n' 
             if t == '徐哲尔博士' else '')
 
 
@@ -96,3 +102,4 @@ if __name__ == '__main__':
     thanks_opportunities()
     sleep(5)
     thanks_me()
+    
