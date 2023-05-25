@@ -55,7 +55,7 @@ print(tukey)
 
 plt.rcParams['font.family'] = ['Arial Unicode MS']
 plt.figure(figsize=(10, 3))
-plt.plot(data1, color='red', label='我们的方法', marker='o')
+plt.plot(data1, color='red', label='Our Method', marker='o')
 plt.plot(data2, color='blue', label='PRISM', marker='s')
 plt.plot(data3, color='black', label='Implicit Gaze', marker='^')
 plt.axhline(y=sum(data1)/len(data1), color='red', linestyle='--')
