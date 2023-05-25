@@ -8,5 +8,6 @@ internal class Configuration : MonoBehaviour
     public float rotationCoefficient = 5.0f;
     public float translationCoefficient = 1.0f;
     public float rescalingCoefficient = 1.0f;
+    public float progressBarSpeed = 1.0f;
     public bool showGazeRay;
 }

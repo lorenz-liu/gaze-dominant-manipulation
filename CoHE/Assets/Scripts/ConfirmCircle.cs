@@ -6,6 +6,7 @@ internal class ConfirmCircle : MonoBehaviour
     public Camera playerCamera;
     public GameObject fullCircle;
     public GameObject loadingCircle;
+    public Configuration configuration;
 
     private float _progress;
     private int _round;
@@ -34,7 +35,7 @@ internal class ConfirmCircle : MonoBehaviour
             10 * forward.z);
         transform.position = pos;
 
-        _progress += ++_round * 0.0001f;
+        _progress += ++_round * 0.0001f * configuration.progressBarSpeed;
         loadingCircle.transform.localScale = new Vector3(OriginScale * _progress, OriginScale * _progress, loadingCircle.transform.localScale.z);
 
         if (OriginScale * _progress >= OriginScale) 
