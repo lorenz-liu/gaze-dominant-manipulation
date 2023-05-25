@@ -12,11 +12,11 @@ HMD: VIVE Focus 3 with its exclusive Eye Tracker (**LETHALLY IMPORTANT: Please m
 Please install by order in case config chaos:
 
 * [INSTALL](https://unity.com/download) Unity Hub
-* [INSTALL](https://dl.vive.com/vbspc/VIVEBusinessStreamingInstaller.exe) VIVE Business Streaming
 * [INSTALL](https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe) Steam
 * [INSTALL](https://store.steampowered.com/app/250820/SteamVR/) SteamVR in Steam
 * [INSTALL](unityhub://2021.3.16f) Unity Editor 2021.3.16f1
 * [INSTALL](https://assetstore.unity.com/packages/tools/integration/steamvr-plugin-32647#reviews) SteamVR Assets in Unity Editor
+* [INSTALL](https://dl.vive.com/vbspc/VIVEBusinessStreamingInstaller.exe) VIVE Business Streaming
 
 ## Documentation & Reference
 
