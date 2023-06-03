@@ -2019,6 +2019,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Avatar_Shieh_V2
       objectReference: {fileID: 0}
+    - target: {fileID: 3051409913850635163, guid: 4e2328178fed81348aec48d0f79c86fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3051409913850733890, guid: 4e2328178fed81348aec48d0f79c86fa, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -4234,7 +4238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d2e81e7c7984900841e921cf29f6472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showAvatar: 1
+  showAvatar: 0
   useWinkingAsConfirmation: 0
   enableSelectionTest: 0
   rotationCoefficient: 5
@@ -4344,7 +4348,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 311313efa011949e98b6761d652ad13c, type: 2}
+  - {fileID: 2100000, guid: 733fa7de874ca6f4abd64315e0336799, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
