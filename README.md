@@ -1,7 +1,7 @@
 # Hands-Free Is Fine: Gaze-Dominant Object Manipulation in Virtual Reality
 > Originally, this project is the graduation project of my undergraduate study at Beihang University. 
 >
-> **Original Title: 虚拟现实头眼协同对象操纵方法设计与实现** (Design and Implementation of a Head-eye Collaborative Object Manipulation Method in Virtual Reality) 
+> **Original Title: 虚拟现实头眼协同对象操纵方法设计与实现** (Design and Implementation of a Head-Eye Collaborative Object Manipulation Method in Virtual Reality) 
 >
 > We made this an IEEE ISMAR paper: [click to read](https://lorenz.fun/files/hands-free-is-fine.pdf). 
 
